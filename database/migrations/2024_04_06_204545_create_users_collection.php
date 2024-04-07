@@ -16,6 +16,7 @@ return new class extends Migration
             $collection->index('name');
             $collection->index('email');
             $collection->index('dni');
+            $collection->index('password');
         });
     }
     /**
