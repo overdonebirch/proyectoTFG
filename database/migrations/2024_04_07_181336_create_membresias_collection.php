@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\Schema;
 use MongoDB\Laravel\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -12,20 +12,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $collection) {
-
-            $collection->string('name');
-            $collection->string('email');
-            $collection->string('dni',9)->maxLength(9);
-            $collection->string('password');
-
+        Schema::create('membresias', function (Blueprint $collection) {
+            $collection->index('name');
         });
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::drop('users');
+        Schema::dropIfExists('membresias');
     }
 };

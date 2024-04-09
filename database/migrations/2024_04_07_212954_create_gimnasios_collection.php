@@ -12,13 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $collection) {
-
+        Schema::create('gimnasios', function (Blueprint $collection) {
             $collection->string('name');
             $collection->string('email');
-            $collection->string('dni',9)->maxLength(9);
+            $collection->string('dni')->maxLength(9);
             $collection->string('password');
-
         });
     }
     /**
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::drop('users');
+        Schema::drop('gimnasios');
     }
 };
