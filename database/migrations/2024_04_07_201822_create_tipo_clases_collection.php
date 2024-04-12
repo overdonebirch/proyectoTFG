@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('tipo_clases', function (Blueprint $collection) {
             $collection->string("nombre");
             $collection->string("descripcion");
+            $collection->objectId("id_tipoclases");
         });
     }
 

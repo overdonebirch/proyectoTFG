@@ -13,7 +13,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('clases', function (Blueprint $collection) {
-           $collection->string("name");
+
+           $collection->string("nombre");
            $collection->index("gimnasios");
 
         });

@@ -13,10 +13,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('gimnasios', function (Blueprint $collection) {
-            $collection->string('name');
-            $collection->string('email');
-            $collection->string('dni')->maxLength(9);
-            $collection->string('password');
+            $collection->string('nombre');
+            $collection->string('direccion');
+            $collection->string('horaApertura');
+            $collection->string('horaCierre');
         });
     }
     /**

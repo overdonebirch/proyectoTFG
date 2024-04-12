@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $collection) {
 
-            $collection->string('name');
+            $collection->string('nombre');
             $collection->string('email');
             $collection->string('dni',9)->maxLength(9);
             $collection->string('password');
