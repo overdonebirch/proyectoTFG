@@ -20,12 +20,22 @@ return new class extends Migration
             $collection->string('password');
 
         });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->unique('email','email_users');
+            $table->unique('dni','dni_users');
+        });
     }
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropIndex('email_users');
+            $table->dropIndex('dni_users');
+        });
+
         Schema::drop('users');
     }
 };
