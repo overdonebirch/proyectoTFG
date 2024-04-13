@@ -11,10 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
+
+
         Schema::create('tipo_clases', function (Blueprint $collection) {
             $collection->string("nombre");
             $collection->string("descripcion");
             $collection->objectId("id_tipoclases");
+        });
+
+        Schema::table('tipo_clases', function (Blueprint $table) {
+            $table->unique('nombre','nombre_tipo_clase');
         });
     }
 
@@ -23,6 +29,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('tipo_clases', function (Blueprint $table) {
+            $table->dropIndex('nombre_tipo_clase');
+
+        });
+
         Schema::dropIfExists('tipo_clases');
     }
 };
