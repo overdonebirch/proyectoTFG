@@ -42,12 +42,15 @@ class ClaseSeeder extends Seeder
             ]
         ]);
 
+
+
+
         Clase::create([
             "nombre" => "bike virtual",
-            "tipoClase" => $gimnasioLeganesId,
+            "tipoClase" => $claseCardioId,
             "gimnasios" => [
                 [
-                    "gimnasio_id" => 11,
+                    "gimnasio_id" => $gimnasioLeganesId,
                     "horario" => [
                         ["dia" => "martes", "horaInicio" => "15:00", "horaFin" => "16:00"],
                         ["dia" => "jueves", "horaInicio" => "11:00", "horaFin" => "12:00"]
