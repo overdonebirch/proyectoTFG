@@ -15,13 +15,26 @@ return new class extends Migration
         Schema::create('membresias', function (Blueprint $collection) {
             $collection->index('nombre');
         });
+
+
+        Schema::table('membresias', function (Blueprint $table) {
+            $table->unique('nombre','nombre_membresia');
+        });
     }
+
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
+
+        Schema::table('membresias', function (Blueprint $table) {
+            $table->dropIndex('nombre_membresia');
+
+        });
+
         Schema::dropIfExists('membresias');
     }
 };
