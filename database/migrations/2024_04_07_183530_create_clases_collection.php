@@ -11,12 +11,19 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
+
+
     {
         Schema::create('clases', function (Blueprint $collection) {
 
            $collection->string("nombre");
            $collection->index("gimnasios");
 
+
+        });
+
+        Schema::table('clases', function (Blueprint $table) {
+            $table->unique('nombre','nombre_clase');
         });
 
     }
@@ -26,6 +33,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+
+        Schema::table('clases', function (Blueprint $table) {
+            $table->dropIndex('nombre_clase');
+
+        });
         Schema::dropIfExists('clases');
     }
 };
