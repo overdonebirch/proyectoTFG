@@ -19,6 +19,11 @@ class Gimnasio extends Model
     ];
 
 
+    public function clases()
+    {
+        return $this->hasMany(Clase::class, 'gimnasio_id');
+    }
+
 
 
 }

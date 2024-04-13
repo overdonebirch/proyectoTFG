@@ -15,4 +15,9 @@ class TipoClase extends Model
         'nombre',
         'descripcion',
     ];
+
+    public function clases()
+    {
+        return $this->hasMany(Clase::class, 'tipoClase');
+    }
 }
