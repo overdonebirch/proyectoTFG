@@ -18,12 +18,24 @@ return new class extends Migration
             $collection->string('horaApertura');
             $collection->string('horaCierre');
         });
+
+        Schema::table('gimnasios', function (Blueprint $table) {
+            $table->unique('nombre','nombre_gimnasio');
+        });
+
     }
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
+
+
+        Schema::table('gimnasios', function (Blueprint $table) {
+            $table->dropIndex('nombre_gimnasio');
+
+        });
+
         Schema::drop('gimnasios');
     }
 };
