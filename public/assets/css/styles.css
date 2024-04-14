@@ -1,0 +1,79 @@
+:root{
+
+    --cabecera: #5A5454;
+    --colorBarra : #ffe4e4;
+    --grisCalido : #EFEFEF;
+    --principal : #F86666;
+    --secundario : #FF9506;
+
+
+}
+
+
+/*********************** Globales *****************/
+
+html{
+    font-size: 62.5%;
+    box-sizing: border-box; /*Esto se usa junto con el box-sizing inherit (ver mas abajo )*/
+    scroll-snap-type: y mandatory;
+}
+
+
+*, *:before, *:after{
+    box-sizing: inherit;  /*esto es para que al poner padding o un border, no aumente el tamaño de las cajas*/
+}
+
+p,a,.textoBoton{
+
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+
+
+    -webkit-text-fill-color: var(--grisCalido);
+
+
+
+    font-size: 2rem;
+}
+
+a{
+    text-decoration: none;
+}
+
+.titulo {
+
+    background: linear-gradient(288deg, rgba(222,215,200,1) 0%, rgba(255,152,57,1) 28%, rgba(242,120,120,1) 51%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+
+    font-size: 4rem;
+}
+
+.boton{
+    width: 15rem;
+}
+
+.cabecera{
+    background-color: var(--cabecera);
+    min-height: 7rem;
+
+}
+
+.inicioTop{
+
+    background: rgb(210,144,83);
+    background: linear-gradient(0deg, rgba(210,144,83,1) 0%, rgba(255,149,6,1) 34%, rgba(248,102,102,1) 93%);
+    height: 40rem;
+}
+
+.principal{
+    background-color: var(--principal);
+}
+
+.secundario{
+    background-color: var(--secundario);
+}
+
+

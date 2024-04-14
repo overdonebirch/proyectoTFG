@@ -23,16 +23,14 @@ Route::get('/', function () {
 
 
 Route::controller(GimnasioController::class)->group(function () {
+    Route::get('/inicio', 'index');
     Route::get('/gyms', 'index');
-});
-
-Route::controller(TipoClaseController::class)->group(function () {
-    Route::get('/tipos', 'index');
 });
 
 
 Route::controller(ClaseController::class)->group(function () {
     Route::get('/clases', 'index');
+
 });
 
 
