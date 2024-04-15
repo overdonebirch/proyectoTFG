@@ -16,10 +16,14 @@
     @include('layouts._partials.menu')
 
     <main class="container-fluid">
-        <section class="row inicioTop">
+        @yield('topInicio')
 
-        </section>
+        @yield('medioInicio')
+
+
     </main>
+
+
 
 </body>
 </html>
