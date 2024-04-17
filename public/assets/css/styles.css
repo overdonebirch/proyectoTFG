@@ -80,10 +80,12 @@ a{
 
 .boton{
     width: 15rem;
+    height: 5rem;
 }
 
 .boton-ancho{
     width: 20rem;
+    height: 8rem;
 }
 
 .cabecera{
@@ -126,18 +128,19 @@ a{
     background-image: url('/assets/img/GrupoEjercitando.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+
 }
 
-.m-left-inicioTop{
-    margin-left: 18rem;
+.margen-pag-inicio{
+    margin-left: 32rem;
 
 }
 
 
 /* Media query para ajustar el margen en pantallas más pequeñas */
 @media (max-width: 992px) {
-    .m-left-inicioTop{
-        margin-left: 5rem;
+    .margen-pag-inicio{
+        margin-left: 1rem;
 
     }
 }
