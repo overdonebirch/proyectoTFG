@@ -1,6 +1,6 @@
 @extends('layouts.plantilla')
 
-@section('topInicio')
+@section('top')
 
 @component('_components.inicio.primeraSeccion')
 
@@ -11,7 +11,7 @@
 
 
 
-@section('medioInicio')
+@section('middle')
 
     @component('_components.inicio.segundaSeccion')
 
