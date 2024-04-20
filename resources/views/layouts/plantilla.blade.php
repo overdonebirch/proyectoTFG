@@ -15,7 +15,7 @@
 
     @include('layouts._partials.menu')
 
-    <main class="container-fluid">
+    <main >
         @yield('topInicio')
 
         @yield('medioInicio')
