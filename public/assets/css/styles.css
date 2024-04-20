@@ -28,7 +28,7 @@ a{
 }
 
 
-p,a,.textoBoton,input{
+p,a,.textoBoton,input,h1,h2,h3{
 
     font-family: "Poppins", sans-serif;
     font-weight: 700;
@@ -63,6 +63,9 @@ input:focus{
 
 .texto-color-secundario{
     -webkit-text-fill-color: var(--secundario);
+}
+.texto-color-principal{
+    -webkit-text-fill-color: var(--principal);
 }
 
 .textoPromocional{
@@ -118,7 +121,7 @@ input:focus{
 }
 
 .margen-pag-inicio{
-    margin-left: 26rem;
+    margin-left: 17rem;
 
 }
 
@@ -131,7 +134,10 @@ input:focus{
 }
 
 
-.inicio__segundaSeccion, .inicio__terceraSeccion, .inicio__cuartaSeccion, .alto_contenedor_60{
+.inicio__segundaSeccion,
+.inicio__terceraSeccion,
+.inicio__cuartaSeccion,
+.top__gimnasio{
 
     height: 60rem;
 
@@ -143,13 +149,13 @@ input:focus{
 
 .input__buscaciudad{
     width: 67rem;
-    font-size: 8rem;
+    font-size: 7rem;
     border-bottom: 4px solid var(--principal);
 
 }
 
 .texto__buscanos{
-    font-size: 12rem;
+    font-size: 9rem;
 }
 
 .texto__iconogimnasios{
@@ -157,7 +163,7 @@ input:focus{
 }
 
 .margen-pag-dondeestamos{
-    margin-left: 15rem;
+    margin-left: 18rem;
 
 }
 
@@ -173,9 +179,39 @@ input:focus{
         text-align: center;
     }
 
+    .margen-pag-dondeestamos{
+
+        margin-left: 2rem;
+
+    }
 }
 
 
+
+/********* CLASES ESPECIFICAS PAG GIMNASIO ESPECIFICO**********/
+
+.texto__titulo{
+    padding-top: 5rem;
+    font-size: 9rem;
+}
+
+.boton__gym__especifico{
+    width: 20rem;
+    height: 10rem;
+    border: 5px solid;
+    border-image: linear-gradient(to right, #F86666, #FF9506); /* Cambia los colores según tus preferencias */
+    border-image-slice: 1;
+
+}
+
+.contenedor__botones{
+    height: 50rem;
+}
+
+
+.contenedor__botones{
+    height: 50rem;
+}
 
 /*********** COLORES ***************/
 
@@ -218,6 +254,15 @@ input:focus{
     height: 500px;
 
 }
+
+.imagenFondo__top__gimnasio{
+    background-image: url('/assets/img/fondo-top-gym.jpg');
+
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
 .imgTransformable {
     top:-50px;
     left:-35px;
