@@ -25,7 +25,7 @@ Route::get('/', function () {
 Route::controller(GimnasioController::class)->group(function () {
     Route::get('/inicio', 'index')->name('inicio');
     Route::get('/dondeEstamos', 'dondeEstamos')->name('dondeEstamos');
-    Route::get('/gimnasio', 'gimnasio')->name('gimnasio');
+    Route::get('/gimnasio/{gimnasio}', 'gimnasio')->name('gimnasio');
 });
 
 

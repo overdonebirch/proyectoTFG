@@ -1,6 +1,6 @@
 @extends('layouts.plantilla')
 
-@section('topInicio')
+@section('top')
 
     <section class="row container-fluid  mt-5 ">
         <div class="col-lg-1 d-flex justify-content-center" >
@@ -21,21 +21,22 @@
                 <path d="M20.2 20.2l1.8 1.8" />
               </svg>
         </div>
+
     </section>
 
 @endsection
 
 
 
-@section('medioInicio')
+@section('middle')
 
     <section class="row container-fluid  mt-5 d-flex justify-content-start margen-pag-dondeestamos">
 
     @foreach ($gimnasios as $gym)
 
-
          @component('_components.dondeEstamos.iconoGimnasio')
-                @slot('gimnasio',$gym->nombre)
+                @slot('gimnasio',$gym)
+                @slot('nombregimnasio',$gym->nombre)
          @endcomponent
 
 

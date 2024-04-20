@@ -17,9 +17,9 @@
 
     <main >
 
-        @yield('topInicio')
+        @yield('top')
 
-        @yield('medioInicio')
+        @yield('middle')
 
 
     </main>

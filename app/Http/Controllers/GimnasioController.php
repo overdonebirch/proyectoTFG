@@ -21,8 +21,14 @@ class GimnasioController extends Controller
         return view("dondeEstamos",compact('gimnasios'));
     }
 
-    public function gimnasio()
+    public function gimnasio($gym)
     {
+
+        $gimnasio = Gimnasio::where('_id', $gym)->first();
+
+        return view("gimnasio",compact('gimnasio'));
+
+
     }
 
 
