@@ -17,16 +17,61 @@ class GimnasioSeeder extends Seeder
         Gimnasio::create([
             'nombre' => "Vitality Parla",
             'direccion' => 'Calle Estrella Polar 5',
-            'horaApertura' => '08:00',
-            'horaCierre' => '23:00',
+            'horarios' => [
+                'lunes_a_viernes' => [
+                    'apertura' => '8:00',
+                    'cierre' => '23:00'
+                ],
+                'sabados' => [
+                    'apertura' => '9:00',
+                    'cierre' => '22:00'
+                ],
+                'domingos_y_festivos' => [
+                    'apertura' => '9:00',
+                    'cierre' => '14:00'
+                ]
+            ]
+
         ]);
         Gimnasio::create([
             'nombre' => "Vitality Leganes",
-            'direccion' => 'Calle Juan de La Cierva, 5',
-            'horaApertura' => '08:00',
-            'horaCierre' => '23:00',
+            'direccion' => 'Calle Madrid, 10',
+            'horarios' => [
+                'lunes_a_viernes' => [
+                    'apertura' => '8:00',
+                    'cierre' => '23:00'
+                ],
+                'sabados' => [
+                    'apertura' => '9:00',
+                    'cierre' => '22:00'
+                ],
+                'domingos_y_festivos' => [
+                    'apertura' => '9:00',
+                    'cierre' => '14:00'
+                ]
+            ]
+
         ]);
 
+        Gimnasio::create([
+            'nombre' => "Vitality Getafe",
+            'direccion' => 'Calle Juan De La Cierva, 7',
+            'horarios' => [
+                'lunes_a_viernes' => [
+                    'apertura' => '8:00',
+                    'cierre' => '23:00'
+                ],
+                'sabados' => [
+                    'apertura' => '9:00',
+                    'cierre' => '22:00'
+                ],
+                'domingos_y_festivos' => [
+                    'apertura' => '9:00',
+                    'cierre' => '14:00'
+                ]
+            ]
+
+        ]);
 
     }
 }
