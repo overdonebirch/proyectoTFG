@@ -16,6 +16,7 @@
     @include('layouts._partials.menu')
 
     <main >
+
         @yield('topInicio')
 
         @yield('medioInicio')

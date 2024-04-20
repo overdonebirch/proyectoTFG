@@ -15,6 +15,17 @@ class GimnasioController extends Controller
         return view("inicio");
     }
 
+    public function dondeEstamos()
+    {
+        $gimnasios = Gimnasio::all();
+        return view("dondeEstamos",compact('gimnasios'));
+    }
+
+    public function gimnasio()
+    {
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */

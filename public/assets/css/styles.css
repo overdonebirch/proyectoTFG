@@ -23,9 +23,12 @@ html{
     box-sizing: inherit;  /*esto es para que al poner padding o un border, no aumente el tamaño de las cajas*/
 }
 
-/************* TEXTOS ************/
+a{
+    text-decoration: none;
+}
 
-p,a,.textoBoton{
+
+p,a,.textoBoton,input{
 
     font-family: "Poppins", sans-serif;
     font-weight: 700;
@@ -35,9 +38,24 @@ p,a,.textoBoton{
     -webkit-text-fill-color: var(--grisCalido);
 
 
-
     font-size: 2rem;
 }
+
+input{
+
+    border: none;
+    outline: none;
+
+
+}
+
+input:focus{
+    border-bottom: 4px solid var(--principal);
+    outline: none;
+}
+
+/************* TEXTOS ************/
+
 
 .texto-negro{
     -webkit-text-fill-color: var(--negroLigero);
@@ -57,16 +75,13 @@ p,a,.textoBoton{
 
 
 
-
-
-
 .textoBoton-fondoBlanco{
     -webkit-text-fill-color: var(--principal);
 }
 
-a{
-    text-decoration: none;
-}
+
+
+/********* CLASES ESPECIFICAS PAG INICIO**********/
 
 .titulo {
 
@@ -102,11 +117,67 @@ a{
 
 }
 
-.inicio__segundaSeccion, .inicio__terceraSeccion, .inicio__cuartaSeccion{
+.margen-pag-inicio{
+    margin-left: 26rem;
+
+}
+
+/* Media query para ajustar el margen en pantallas más pequeñas */
+@media (max-width: 992px) {
+    .margen-pag-inicio{
+        margin-left: 1rem;
+
+    }
+}
+
+
+.inicio__segundaSeccion, .inicio__terceraSeccion, .inicio__cuartaSeccion, .alto_contenedor_60{
 
     height: 60rem;
 
 }
+
+
+
+/********* CLASES ESPECIFICAS PAG DONDE ESTAMOS**********/
+
+.input__buscaciudad{
+    width: 67rem;
+    font-size: 8rem;
+    border-bottom: 4px solid var(--principal);
+
+}
+
+.texto__buscanos{
+    font-size: 12rem;
+}
+
+.texto__iconogimnasios{
+    font-size: 8rem;
+}
+
+.margen-pag-dondeestamos{
+    margin-left: 15rem;
+
+}
+
+@media (max-width: 992px) {
+    .input__buscaciudad{
+        width: 40rem;
+        font-size: 3rem;
+        text-align: center;
+    }
+
+    .texto__buscanos{
+        font-size: 5rem;
+        text-align: center;
+    }
+
+}
+
+
+
+/*********** COLORES ***************/
 
 .color-principal{
     background-color: var(--principal);
@@ -120,6 +191,17 @@ a{
     background-color: white;
 }
 
+
+
+
+
+
+
+
+
+
+/********IMAGENES ******/
+
 .imagenFondo{
     background-image: url('/assets/img/GrupoEjercitando.jpg');
     background-size: cover;
@@ -127,21 +209,15 @@ a{
 
 }
 
-.margen-pag-inicio{
-    margin-left: 26rem;
+.imagenFondo__gimnasios{
+    background-image: url('/assets/img/gym3.jpg');
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 1000px;
+    height: 500px;
 
 }
-
-
-/* Media query para ajustar el margen en pantallas más pequeñas */
-@media (max-width: 992px) {
-    .margen-pag-inicio{
-        margin-left: 1rem;
-
-    }
-}
-
-
 .imgTransformable {
     top:-50px;
     left:-35px;
