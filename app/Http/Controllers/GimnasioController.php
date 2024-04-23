@@ -25,7 +25,6 @@ class GimnasioController extends Controller
     {
 
         $gimnasio = Gimnasio::where('_id', $gym)->first();
-
         return view("gimnasio",compact('gimnasio'));
 
 

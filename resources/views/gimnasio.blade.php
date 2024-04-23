@@ -36,7 +36,11 @@
     </section>
 
     @component('_components.gimnasio.datosGimnasio')
+        @slot('lunesaviernes',"de ". $gimnasio->horarios["lunes_a_viernes"]["apertura"]. " a ".$gimnasio->horarios["lunes_a_viernes"]["cierre"] )
+        @slot('sabados',"de ". $gimnasio->horarios["sabados"]["apertura"]. " a ".$gimnasio->horarios["sabados"]["cierre"] )
+        @slot('domingosyfestivos',"de ". $gimnasio->horarios["domingos_y_festivos"]["apertura"]. " a ".$gimnasio->horarios["domingos_y_festivos"]["cierre"] )
 
+        @slot('direccion', $gimnasio->direccion)
     @endcomponent
 
 @endsection

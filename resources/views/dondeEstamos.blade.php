@@ -37,6 +37,7 @@
          @component('_components.dondeEstamos.iconoGimnasio')
                 @slot('gimnasio',$gym)
                 @slot('nombregimnasio',$gym->nombre)
+
          @endcomponent
 
 
