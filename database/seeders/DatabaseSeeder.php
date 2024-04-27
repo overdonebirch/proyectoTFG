@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $this->call(TipoClaseSeeder::class);
+
         $this->call(GimnasioSeeder::class);
         $this->call(ClaseSeeder::class);
 

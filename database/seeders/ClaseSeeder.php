@@ -29,7 +29,12 @@ class ClaseSeeder extends Seeder
 
 
             "nombre" => "bike fisico",
-            "tipoClase" => $claseCardioId,
+            "tipoClase" => [
+                [
+                "nombre" => "Cardio",
+                "descripcion" => "Quemar calorias como debe ser",
+                ]
+            ],
             "gimnasios" => [
                 [
                     "gimnasio_id" => $gimnasioParlaId ,
@@ -47,7 +52,12 @@ class ClaseSeeder extends Seeder
 
         Clase::create([
             "nombre" => "bike virtual",
-            "tipoClase" => $claseCardioId,
+            "tipoClase" => [
+                [
+                "nombre" => "Cardio",
+                "descripcion" => "Quemar calorias como debe ser",
+                ]
+            ],
             "gimnasios" => [
                 [
                     "gimnasio_id" => $gimnasioLeganesId,
