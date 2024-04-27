@@ -61,6 +61,11 @@ input:focus{
     -webkit-text-fill-color: var(--negroLigero);
 }
 
+.negro{
+    -webkit-text-fill-color: var(--secundario);
+}
+
+
 .texto-color-secundario{
     -webkit-text-fill-color: var(--secundario);
 }
@@ -204,6 +209,9 @@ input:focus{
 
 }
 
+.negro{
+    color: black;
+}
 .boton__gym__especifico:hover{
 
     transition: transform 0.5s ease;

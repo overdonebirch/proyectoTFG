@@ -22,18 +22,11 @@
     @endcomponent
 
 
-    <section class="container-fluid">
+    @component('_components.gimnasio.carruselImagenes')
 
-        <section class="row contenedor__botones">
-
-                <div class="col-md-12 d-flex justify-content-center align-items-start">
-                     <p class="textoPromocional__subtitulo texto-negro">Fotos De Las Instalaciones</p>
-                </div>
+    @endcomponent
 
 
-        </section>
-
-    </section>
 
     @component('_components.gimnasio.datosGimnasio')
         @slot('lunesaviernes',"de ". $gimnasio->horarios["lunes_a_viernes"]["apertura"]. " a ".$gimnasio->horarios["lunes_a_viernes"]["cierre"] )

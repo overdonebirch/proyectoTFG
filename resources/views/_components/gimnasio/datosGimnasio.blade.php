@@ -1,6 +1,6 @@
 <section class="container-fluid">
 
-    <section class="row contenedor__botones">
+    <section class="row contenedor__botones mt-5">
 
         <div class="col-md-6 d-flex flex-column justify-content-start align-items-center">
 
