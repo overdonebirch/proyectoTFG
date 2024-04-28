@@ -29,10 +29,11 @@ class ClaseSeeder extends Seeder
 
 
             "nombre" => "bike fisico",
-            "tipoClase" => [
+            "tipo_clase" => [
                 [
-                "nombre" => "Cardio",
-                "descripcion" => "Quemar calorias como debe ser",
+                    "tipo_clase_id" => "662e7289174ba290ea075ce2",
+                    "nombre" => "Cardio",
+                    "descripcion" => "Quemar calorias como debe ser",
                 ]
             ],
             "gimnasios" => [
@@ -54,8 +55,9 @@ class ClaseSeeder extends Seeder
             "nombre" => "bike virtual",
             "tipoClase" => [
                 [
-                "nombre" => "Cardio",
-                "descripcion" => "Quemar calorias como debe ser",
+                    "tipo_clase_id" => "662e7289174ba290ea075ce2",
+                    "nombre" => "Cardio",
+                    "descripcion" => "Quemar calorias como debe ser",
                 ]
             ],
             "gimnasios" => [
