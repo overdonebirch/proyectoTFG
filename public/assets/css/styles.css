@@ -61,6 +61,9 @@ p,a,.textoBoton,input,h1,h2,h3{
     -webkit-text-fill-color: var(--principal);
 }
 
+.centrar{
+    text-align: center;
+}
 .textoPromocional{
     font-size: 5rem;
 }
@@ -78,6 +81,11 @@ p,a,.textoBoton,input,h1,h2,h3{
 
 
 /********* CLASES ESPECIFICAS PAG INICIO**********/
+
+.color-form{
+
+    background-color: var(--principal);
+}
 
 .titulo {
 
