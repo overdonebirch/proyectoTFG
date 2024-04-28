@@ -15,9 +15,15 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $collection) {
 
             $collection->string('nombre');
+            $collection->string('apellidos');
             $collection->string('email');
             $collection->string('dni',9)->maxLength(9);
             $collection->string('password');
+            $collection->objectId('id_gimnasio');
+            $collection->json('tipo_membresia');
+            $collection->string('fechainicio_membresía');
+            $collection->string('fechafin_membresía');
+            $collection->integer('periodicidad_pago');
 
         });
 

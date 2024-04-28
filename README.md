@@ -21,3 +21,13 @@ A continuación, en el fichero config/database.php añadimos esto en el array 'c
             'dsn'      => env('MONGODB_URI'),
             'database' => env('MONGODB_DATABASE', 'gimnasio'),
         ],
+
+
+## Paquetes requeridos : 
+
+### Autenticación :
+
+1. composer require laravel/breeze --dev 
+
+2. php artisan breeze:install blade
+

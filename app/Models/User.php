@@ -23,9 +23,16 @@ class User extends Authenticatable
 
     protected $fillable = [
         'nombre',
+        'apellidos',
         'email',
         'dni',
-        'password'
+        'password',
+        'id_gimnasio',
+        'tipo_membresía',
+        'fechainicio_membresía',
+        'fechafin_membresía',
+        'periodicidad_pago'
+
     ];
 
     /**
@@ -46,4 +53,5 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
 }
