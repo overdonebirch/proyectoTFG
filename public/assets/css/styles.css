@@ -41,18 +41,6 @@ p,a,.textoBoton,input,h1,h2,h3{
     font-size: 2rem;
 }
 
-input{
-
-    border: none;
-    outline: none;
-
-
-}
-
-input:focus{
-    border-bottom: 4px solid var(--principal);
-    outline: none;
-}
 
 /************* TEXTOS ************/
 
@@ -152,7 +140,15 @@ input:focus{
 
 /********* CLASES ESPECIFICAS PAG DONDE ESTAMOS**********/
 
+.input__buscaciudad:focus{
+    border-bottom: 4px solid var(--principal);
+    outline: none;
+}
+
 .input__buscaciudad{
+    border: none;
+    outline: none;
+
     width: 67rem;
     font-size: 7rem;
     border-bottom: 4px solid var(--principal);
