@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gimnasio;
+use App\Models\Membresia;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -25,8 +26,9 @@ class UserController extends Controller
     public function create(Request $request)
     {
         $gimnasios = Gimnasio::all();
+        $membresias = Membresia::all();
 
-        return view('auth.register',compact('gimnasios'));
+        return view('auth.register',compact('gimnasios','membresias'));
     }
 
 
