@@ -37,13 +37,15 @@ class UserController extends Controller
     {
 
         User::create([
-            'nombre' => $request->name,
+            'nombre' => $request->nombre,
             'email' => $request->email,
+            'dni' => $request->dni,
             'password' => Hash::make($request->password),
             'id_gimnasio' => $request->id_gimnasio,
 
         ]);
 
+        return redirect('inicio')->with('success', 'Usuario Registrado');
 
     }
 
