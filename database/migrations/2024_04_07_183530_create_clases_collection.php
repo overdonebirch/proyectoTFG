@@ -18,7 +18,7 @@ return new class extends Migration
 
            $collection->string("nombre");
            $collection->index("gimnasios");
-
+           $collection->json("tipo_clase");
 
         });
 
