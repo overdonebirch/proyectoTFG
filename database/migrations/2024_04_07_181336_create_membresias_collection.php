@@ -13,13 +13,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('membresias', function (Blueprint $collection) {
-            $collection->index('nombre');
+            $collection->string('nombre');
+            $collection->double('precio');
+            $collection->boolean('invitar_amigo');
+            $collection->boolean('acceso_clases_basicas');
+            $collection->boolean('acceso_clases_premium');
         });
 
 
         Schema::table('membresias', function (Blueprint $table) {
             $table->unique('nombre','nombre_membresia');
         });
+
+
     }
 
 
