@@ -25,5 +25,15 @@ class TipoClaseSeeder extends Seeder
             'descripcion' => 'Para quitar el estrés',
 
         ]);
+
+        TipoClase::create([
+            'nombre' => "Tonificar",
+            'descripcion' => 'Ganar Masa Muscular',
+        ]);
+
+        TipoClase::create([
+            'nombre' => "Baile",
+            'descripcion' => 'Aquiere ritmo mientras quemas calorias',
+        ]);
     }
 }
