@@ -14,16 +14,6 @@ class PayPalController extends Controller
     public function payment(Request $request){
 
 
-
-
-            // if(isset($response['id']) && $response['id']!=null){
-        //     foreach($response['links'] as $link){
-        //         return redirect()->away($link['href']);
-        //     }
-        // }
-        // else{
-        //     return redirect()->route('cancel');
-        // }
         $fecha_actual = Carbon::now()->addHours(1)->toIso8601String();
         $provider = new PayPalClient;
 
@@ -35,16 +25,78 @@ class PayPalController extends Controller
 
 
         $paypalSub = new PayPalSubscriptions();
-        return $paypalSub->create("P-07892534WR854431JMYZ5Q3I",0,"null",0,$request);
+
+        // return $paypalSub->create("P-76V37557B4729941RMY3F57Y",0,"null",0,$request);
+
+        return $paypalSub->cancel("I-5E6UT6REK1T6");
+
+    }
+
+
+
+    public function buscarPlan($provider,$nombre){
+
+        $planes = $this->listPlans($provider);
+        foreach ($planes['plans'] as $plan) {
+
+            if (array_key_exists('name', $plan)) {
+
+                if($plan['name'] == $nombre){
+
+                    return $plan['name'];
+
+                }
+
+            } else {
+
+                echo "El producto no tiene un nombre definido. <br>";
+
+            }
+        }
 
 
     }
-    private function createPlan($provider){
+
+
+    public function buscarProducto($provider,$nombre){
+
+        $productos = $this->listProducts($provider);
+        foreach ($productos['products'] as $producto) {
+
+            if (array_key_exists('name', $producto)) {
+
+                if($this->compararStrings($producto['name'],$nombre)){
+                    return $producto['id'];
+                }
+
+            } else {
+
+               return null;
+
+            }
+        }
+
+
+    }
+
+    public function listProducts($provider){
+        return $provider->listProducts();
+
+    }
+
+    public function listPlans($provider){
+        return $provider->listPlans();
+    }
+
+
+
+
+    public function createPlan($provider,$product_id){
 
 
         $plan = $provider->createPlan([
 
-            "product_id" => "XXCD1234QWER65755",
+            "product_id" => $product_id,
             "name" => "Plan Mensual Suscripcion Basica",
             "description" => "Plan Mensual Suscripcion Basica ",
             "status" => "ACTIVE",
@@ -85,7 +137,10 @@ class PayPalController extends Controller
         $provider->setCurrency('EUR');
         $provider->getAccessToken();
 
-        return "Se creó la suscricion para el mail : ". $request->email;
+        $nombre = $request->session()->get('nombre');
+        $email = $request->session()->get('email');
+
+        return $nombre;
 
         // $response = $provider->listSubscriptionTransactions($request->token, '2018-01-21T07:50:20.940Z', '2018-08-22T07:50:20.940Z');
 
@@ -95,5 +150,20 @@ class PayPalController extends Controller
 
     public function cancel(){
 
+        return redirect()->route('inicio')->with("error","se canceló el proceso de subscripción");
+
+    }
+
+    private function compararStrings($str1, $str2) {
+
+        $str1 = trim(strtolower($str1));
+        $str2 = trim(strtolower($str2));
+
+        // Remover acentos usando la función de transliteración de PHP
+        $str1 = iconv('UTF-8', 'ASCII//TRANSLIT', $str1);
+        $str2 = iconv('UTF-8', 'ASCII//TRANSLIT', $str2);
+
+        // Comparar las cadenas ignorando mayúsculas, acentos y espacios en blanco
+        return strcasecmp($str1, $str2) === 0;
     }
 }

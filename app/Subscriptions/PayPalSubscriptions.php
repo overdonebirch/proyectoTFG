@@ -28,7 +28,6 @@ class PayPalSubscriptions implements Subscriptions
     public function create(string $plan_id, int $coupon_user_id, string $method, float $amount = 0,Request $request){
 
 
-        return $request;
         $paypalPlanId = $plan_id;
 
         $data = [
@@ -79,12 +78,18 @@ class PayPalSubscriptions implements Subscriptions
 
         $response = $this->provider->createSubscription($data);
 
-
         if (isset($response['id']) && $response['id'] != null) {
             // Redirect to PayPal approval URL
             foreach ($response['links'] as $link) {
                 if ($link['rel'] == 'approve') {
-                    return redirect()->away($link['href']);
+
+                    $request->session()->put('nombre', $request->nombre);
+                    $request->session()->put('email', $request->email);
+
+                    return redirect()
+                    ->away($link['href'])
+                    ->withInput();
+
                 }
             }
 
@@ -100,6 +105,14 @@ class PayPalSubscriptions implements Subscriptions
     }
 
     public function cancel(string $subscription_id = null){
+
+        try {
+            $response = $this->provider->cancelSubscription($subscription_id, "no longer using");
+            redirect()->route('inicio')->with("success","se canceló la suscripcion");
+        } catch (Exception $e) {
+            $error = "Something went wrong." . $e->getMessage();
+            return "no se cancelo";
+        }
 
 
     }
