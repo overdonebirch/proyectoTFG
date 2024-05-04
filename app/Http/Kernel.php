@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\UpgradeToHttpsUnderNgrok;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -38,6 +39,7 @@ class Kernel extends HttpKernel
             \Illuminate\Session\Middleware\AuthenticateSession::class,
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\UpgradeToHttpsUnderNgrok::class,
         ],
 
         'api' => [

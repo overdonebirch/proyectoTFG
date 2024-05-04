@@ -3,7 +3,7 @@
 @section('middle')
 
 
-<form action = "{{ route('registro') }}" method="post" >
+<form action = "{{ route('payment') }}" method="get" >
     @csrf
     <div class="container px-4 px-lg-5 color-form rounded p-4 mt-5" style="width: 30%;">
         <!-- Contenido del contenedor... -->

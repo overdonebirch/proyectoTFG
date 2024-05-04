@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClaseController;
 use App\Http\Controllers\GimnasioController;
+use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,13 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/registro',  'create')->name('formRegistro');
     Route::post('/registro', 'store')->name('registro');
 });
+
+Route::controller(PayPalController::class)->group(function () {
+    Route::get('/paypal/payment',  'payment')->name('payment');
+    Route::get('/paypal/success', 'success')->name('success');
+    Route::get('/paypal/cancel', 'cancel')->name('cancel');
+});
+
 
 
 Route::middleware('auth')->group(function () {
