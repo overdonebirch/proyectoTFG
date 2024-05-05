@@ -37,9 +37,9 @@
         </div>
         <div class="mb-3">
             <label for="categoria" class="form-label text-white">Elige tu membresía: </label>
-            <select class="form-select w-100" name="id_gimnasio" id="membresia">
+            <select class="form-select w-100" name="id_membresia" id="membresia">
                 @foreach ($membresias as $m)
-                    <option value="{{ $m->_id }}">{{ $m->nombre }}</option>
+                    <option value="{{ $m }}">{{ $m->nombre }}</option>
                 @endforeach
             </select>
         </div>
