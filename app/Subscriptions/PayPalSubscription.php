@@ -4,11 +4,11 @@ namespace App\Subscriptions;
 
 use App\Subscriptions\Subscriptions;
 use Exception;
-use Illuminate\Support\Facades\Log;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
-class PayPalSubscriptions implements Subscriptions
+class PayPalSubscription implements Subscriptions
 {
     protected $provider;
 
@@ -22,11 +22,9 @@ class PayPalSubscriptions implements Subscriptions
         $this->provider->showTotals(config('paypal.total_required'));
 
 
-
     }
 
     public function create(string $plan_id, int $coupon_user_id, string $method, float $amount = 0,Request $request){
-
 
         $paypalPlanId = $plan_id;
 
@@ -84,7 +82,13 @@ class PayPalSubscriptions implements Subscriptions
                 if ($link['rel'] == 'approve') {
 
                     $request->session()->put('nombre', $request->nombre);
+                    $request->session()->put('apellidos', $request->apellidos);
                     $request->session()->put('email', $request->email);
+                    $request->session()->put('dni', $request->dni);
+                    $request->session()->put('password', Hash::make($request->password));
+                    $request->session()->put('id_gimnasio', $request->id_gimnasio);
+                    $request->session()->put('id_membresia', $request->id_membresia);
+
 
                     return redirect()
                     ->away($link['href'])
