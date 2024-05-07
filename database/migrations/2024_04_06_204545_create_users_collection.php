@@ -20,10 +20,9 @@ return new class extends Migration
             $collection->string('dni',9)->maxLength(9);
             $collection->string('password');
             $collection->objectId('id_gimnasio');
-            $collection->json('tipo_membresia');
+            $collection->json('membresia');
             $collection->string('fechainicio_membresía');
             $collection->string('fechafin_membresía');
-            $collection->integer('periodicidad_pago');
 
         });
 
