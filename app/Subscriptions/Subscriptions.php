@@ -8,4 +8,6 @@ interface Subscriptions
     public function cancel(string $subscription_id = null);
     public function pause();
     public function resume();
+
+    // public function getDetails(string $subscription_id = null );
 }
