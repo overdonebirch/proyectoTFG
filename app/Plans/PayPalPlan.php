@@ -25,7 +25,7 @@ class PayPalPlan implements Plans
 
     }
 
-    public function create(string $product_id, string $frecuency){
+    public function create(string $product_id, string $frecuency, float $price){
 
 
         $plan = $this->provider->createPlan([
@@ -45,7 +45,7 @@ class PayPalPlan implements Plans
                     "total_cycles" => 1,
                     "pricing_scheme" => [
                         "fixed_price" => [
-                            "value" => 20,
+                            "value" => $price,
                             "currency_code" => "EUR"
                         ]
                     ]
