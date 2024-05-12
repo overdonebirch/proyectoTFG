@@ -31,10 +31,6 @@ class PayPalSubscription implements Subscriptions
         $data = [
             'plan_id' => $paypalPlanId,
             'quantity' => '1',
-            'shipping_amount' => [
-                'currency_code' => 'EUR',
-                'value' => 0.00,
-            ],
             'subscriber' => [
                 'name' => [
                     'given_name' => $request->nombre,
