@@ -25,13 +25,13 @@ class PayPalPlan implements Plans
 
     }
 
-    public function create(string $product_id, string $frecuency, float $price){
+    public function create(string $name, string $product_id, string $frecuency, float $price){
 
 
         $plan = $this->provider->createPlan([
 
             "product_id" => $product_id,
-            "name" => "Plan Mensual Suscripcion Basica",
+            "name" => $name,
             "description" => "Plan Mensual Suscripcion Basica ",
             "status" => "ACTIVE",
             "billing_cycles" => [
