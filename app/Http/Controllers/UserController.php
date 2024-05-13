@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Gimnasio;
 use App\Models\Membresia;
+use App\Models\Plan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -27,8 +28,10 @@ class UserController extends Controller
     {
         $gimnasios = Gimnasio::all();
         $membresias = Membresia::all();
+        $planes = Plan::all();
 
-        return view('auth.register',compact('gimnasios','membresias'));
+
+        return view('auth.register',compact('gimnasios','membresias','planes'));
     }
 
 
