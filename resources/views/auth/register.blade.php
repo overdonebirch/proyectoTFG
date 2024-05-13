@@ -46,7 +46,7 @@
 
         <div class="mb-3" id="precios-div" style="display: none;">
             <label for="precio" class="form-label text-white">Elige el precio y período : </label>
-            <select class="form-select w-100" name="precio" id="precios">
+            <select class="form-select w-100" name="plan_id" id="plan">
 
             </select>
         </div>
@@ -58,40 +58,28 @@
 
 {{-- Cambiar los precios mostrados:  --}}
 <script>
-
     const selectMembresia = document.getElementById('membresia');
-
     const preciosDiv = document.getElementById('precios-div');
-
-    const selectPrecios = document.getElementById('precios');
-
+    const selectPrecios = document.getElementById('plan');
+    const planes = {!! json_encode($planes) !!};
 
     selectMembresia.addEventListener('change', function() {
+        const selectedMembresiaName = selectMembresia.options[selectMembresia.selectedIndex].text.toLowerCase();
 
-        const selectedMembresiaId = selectMembresia.value;
-
-
-        if (selectedMembresiaId) {
-
+        if (selectedMembresiaName) {
             preciosDiv.style.display = 'block';
-
-
-            const selectedMembresia = {!! json_encode($membresias) !!}.find(m => m._id === selectedMembresiaId);
 
             selectPrecios.innerHTML = '';
 
-            // Seleccionar el periodo y precios :
-            selectedMembresia.periodos_meses.forEach(meses => {
-
-                let valorTotal = selectedMembresia.precio * meses;
-                let option = document.createElement('option');
-                option.textContent = meses+ " meses : " +valorTotal + " €";
-                option.value = valorTotal+"|"+meses ;
-                selectPrecios.appendChild(option);
-
+            planes.forEach(plan => {
+                const planName = plan.name.toLowerCase();
+                if (planName.includes(selectedMembresiaName)) {
+                    const option = document.createElement('option');
+                    option.textContent = `${plan.name} : ${plan.price} €`;
+                    option.value = plan.id;
+                    selectPrecios.appendChild(option);
+                }
             });
-
-
         } else {
             preciosDiv.style.display = 'none';
         }
