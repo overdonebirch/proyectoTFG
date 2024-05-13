@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Membresia;
+use App\Models\Plan;
+use App\Models\Product;
+use App\Models\Suscripcion;
 use App\Models\User;
 use App\Subscriptions\PayPalSubscription;
 use App\Plans\PayPalPlan;
@@ -25,12 +28,18 @@ class PayPalController extends Controller
         $provider->showTotals(config('paypal.total_required'));
         $provider->getAccessToken();
 
-        return $this->getProductDetails("Suscripcion basica anual");
-        // $paypalSub = new PayPalSubscription();
-        // return $paypalSub->create("P-76V37557B4729941RMY3F57Y",0,"",0,$request);
+
+        $plan_id = $request->plan_id;
+        return $this->createSuscription($plan_id,$request);
+
 
     }
 
+    public function createSuscription($plan_id,$request){
+
+       $paypalSub = new PayPalSubscription();
+       return $paypalSub->create($plan_id,0,"",0,$request);
+    }
 
 
     public function listPlans(){
@@ -41,10 +50,20 @@ class PayPalController extends Controller
     }
 
 
-    public function createPlan($product_id,$frecuency){
+    public function createPlan($name, $product_id,$frecuency,$price){
 
         $plan = new PayPalPlan();
-        $plan->create($product_id,$frecuency);
+        $planCreado = $plan->create($name,$product_id,$frecuency,$price); // La variable planCreado se utiliza para obtener todos los datos del plan de paypal, pero solo utilizaremos el campo name e id
+
+        $plan = new Plan();
+
+        $plan->name = $planCreado["name"];
+        $plan->id = $planCreado["id"];
+        $plan->price= $price;
+
+        $plan->save();
+
+        return $plan;
 
     }
 
@@ -58,8 +77,18 @@ class PayPalController extends Controller
     public function createProduct($name,$description){
 
         $product = new PayPalProduct();
-        return $product->create($name,$description);
+        $productoCreado = $product->create($name,$description);
 
+        $product = new Product();
+
+        $product->id = $productoCreado["id"];
+        $product->name = $productoCreado["name"];
+        $product->description = $productoCreado["description"];
+
+        $product->save();
+
+
+        return $product;
 
     }
 
@@ -71,7 +100,7 @@ class PayPalController extends Controller
 
     }
 
-    public function listProducts($provider){
+    public function listProducts(){
 
         $product = new PayPalProduct();
         return $product->listProducts();
@@ -86,7 +115,7 @@ class PayPalController extends Controller
         $id_membresia = $request->session()->get('id_membresia');
         $membresia = Membresia::where("_id",$id_membresia)->first();
 
-        User::create([
+        $user = User::create([
 
             'nombre' => $request->session()->get('nombre'),
             'apellidos' => $request->session()->get('apellidos'),
@@ -96,6 +125,13 @@ class PayPalController extends Controller
             'id_gimnasio' => $request->session()->get('id_gimnasio'),
             'membresia' => $membresia->toArray(),
 
+
+        ]);
+
+        Suscripcion::create([
+
+            "id_cliente" => $user->_id,
+            "id_suscripcion" => $request->subscription_id,
 
         ]);
 
