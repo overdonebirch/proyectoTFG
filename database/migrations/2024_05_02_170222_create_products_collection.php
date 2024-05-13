@@ -15,10 +15,7 @@ return new class extends Migration
             $table->string("id",255);
             $table->string("name",255);
             $table->string("description",255);
-            $table->string("type",255);
-            $table->string("category",255);
-            $table->string("image_url",255);
-            $table->string("home_url",255);
+
         });
 
         Schema::table('products', function (Blueprint $table) {
