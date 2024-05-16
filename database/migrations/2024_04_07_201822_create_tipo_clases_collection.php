@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('tipo_clases', function (Blueprint $collection) {
             $collection->string("nombre");
             $collection->string("descripcion");
+            $collection->boolean("clase_premium");
         });
 
         Schema::table('tipo_clases', function (Blueprint $table) {
