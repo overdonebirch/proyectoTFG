@@ -17,7 +17,7 @@
         'Relajacion' => '#F7D1E2',
         'Tonificar' => '#393D3C',
         'Baile' => '#FF5D12',
-        // Añade más tipos y colores según sea necesario
+
     ];
 
 @endphp
@@ -26,6 +26,24 @@
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
+            eventContent: function(arg){
+
+                    let startTime = arg.event.start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    let endTime = arg.event.end ? arg.event.end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '';
+                    let eventTitle = arg.event.title;
+
+                    // Añadir el círculo de color a la izquierda
+                    let dotEl = document.createElement('div');
+                    dotEl.classList.add('fc-daygrid-event-dot');
+                    dotEl.style.borderColor = arg.event.backgroundColor || arg.event.borderColor;
+
+                    // Crear contenedor para el contenido personalizado
+                    let customContentEl = document.createElement('div');
+                    customContentEl.innerHTML = `<b>${startTime} - ${endTime}</b><br>${eventTitle}`;
+
+                    return { domNodes: [dotEl, customContentEl] };
+
+                },
             events: [
                 @foreach($clases as $clase)
                     @foreach($clase->gimnasios as $gimnasio)
@@ -42,14 +60,15 @@
                                 });
 
                                 $color = $colorMapping[$clase->tipo_clase['nombre']] ?? '#378006'; // Color por defecto si no se encuentra
+
                             @endphp
 
                             @foreach($filteredDates as $date)
                                 @php
+
                                     // Establecer la hora de inicio y fin en base al horario
                                     $startTime = $date->copy()->setHour($horario['horaInicio'])->setMinute(0);
                                     $endTime = $date->copy()->setHour($horario['horaFin'])->setMinute(0);
-
 
                                 @endphp
                                 {
