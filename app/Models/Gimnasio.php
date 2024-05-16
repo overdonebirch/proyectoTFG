@@ -13,15 +13,15 @@ class Gimnasio extends Model
 
     protected $fillable = [
         'nombre',
-        'email',
-        'dni',
-        'password'
+        'direccion',
+        'horarios',
+        'clases',
     ];
 
 
     public function clases()
     {
-        return $this->hasMany(Clase::class, 'gimnasio_id');
+        return $this->embedsMany(Clase::class, 'clases');
     }
 
 

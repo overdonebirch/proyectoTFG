@@ -17,7 +17,7 @@ class Clase extends Model
 
     public function gimnasios()
     {
-        return $this->embedsMany(Gimnasio::class);
+        return $this->belongsTo(Gimnasio::class);
     }
 
     public function tipoClase()
