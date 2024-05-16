@@ -15,8 +15,10 @@ return new class extends Migration
         Schema::create('gimnasios', function (Blueprint $collection) {
             $collection->string('nombre');
             $collection->string('direccion');
-            $collection->string('horaApertura');
-            $collection->string('horaCierre');
+            $collection->json('horarios');
+            $collection->json('clases');
+
+
         });
 
         Schema::table('gimnasios', function (Blueprint $table) {

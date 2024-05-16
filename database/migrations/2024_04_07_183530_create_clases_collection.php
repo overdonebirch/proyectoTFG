@@ -17,8 +17,8 @@ return new class extends Migration
         Schema::create('clases', function (Blueprint $collection) {
 
            $collection->string("nombre");
-           $collection->index("gimnasios");
            $collection->json("tipo_clase");
+
 
         });
 
