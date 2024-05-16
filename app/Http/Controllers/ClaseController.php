@@ -15,10 +15,11 @@ class ClaseController extends Controller
     public function index()
     {
 
-        $clases = Clase::all();
-        $gimnasioId = Gimnasio::where('nombre','Vitality Parla')->first()->id;
 
-        $clases = Clase::where('gimnasios.gimnasio_id', $gimnasioId)->get();;
+        $gimnasio = Gimnasio::where('nombre','Vitality Parla')->first();
+
+        $clases = $gimnasio->clases;
+
 
         return view("clases",compact('clases'));
 
