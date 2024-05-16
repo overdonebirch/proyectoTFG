@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Clase;
 use App\Models\Gimnasio;
+use App\Models\TipoClase;
 use Illuminate\Http\Request;
 
 class ClaseController extends Controller
@@ -14,6 +15,13 @@ class ClaseController extends Controller
     public function index()
     {
 
+        $clases = Clase::all();
+        $gimnasioId = Gimnasio::where('nombre','Vitality Parla')->first()->id;
+
+        $clases = Clase::where('gimnasios.gimnasio_id', $gimnasioId)->get();;
+
+        return view("clases",compact('clases'));
+
     }
 
     /**
@@ -21,7 +29,7 @@ class ClaseController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
