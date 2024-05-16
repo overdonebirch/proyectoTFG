@@ -28,7 +28,7 @@ a{
 }
 
 
-p,a,.textoBoton,input,h1,h2,h3{
+p,.textoBoton,input,.texto-menu{
 
     font-family: "Poppins", sans-serif;
     font-weight: 700;
@@ -44,6 +44,18 @@ p,a,.textoBoton,input,h1,h2,h3{
 
 /************* TEXTOS ************/
 
+.texto-calendario{
+
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+
+
+    -webkit-text-fill-color: var(--negroLigero);
+
+
+    font-size: 2rem;
+}
 
 .texto-negro{
     -webkit-text-fill-color: var(--negroLigero);
@@ -98,8 +110,10 @@ p,a,.textoBoton,input,h1,h2,h3{
 }
 
 .boton{
-    width: 15rem;
+    display: flex;
+    width: 20rem;
     height: 5rem;
+    align-items: center;
 }
 
 .boton-ancho{
