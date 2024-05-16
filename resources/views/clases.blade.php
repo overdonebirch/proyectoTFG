@@ -46,43 +46,45 @@
                 },
             events: [
                 @foreach($clases as $clase)
-                    @foreach($clase->gimnasios as $gimnasio)
-                        @foreach($gimnasio['horario'] as $horario)
+
+                    @foreach($clase->horario as $horario)
+                        @php
+                            $nombreClase = $clase['clase']['tipo_clase']['nombre'];
+
+                            // Obtener todos los días del mes
+                            $firstDayOfMonth = \Carbon\Carbon::now()->startOfMonth();
+                            $lastDayOfMonth = \Carbon\Carbon::now()->endOfMonth();
+                            $dates = \Carbon\CarbonPeriod::create($firstDayOfMonth, $lastDayOfMonth);
+
+                            // Filtrar para obtener solo los días que coinciden con el día de la semana especificado
+                            $filteredDates = collect($dates)->filter(function ($date) use ($horario) {
+                                return $date->dayOfWeek === $horario['dia'];
+                            });
+
+                            $color = $colorMapping[$nombreClase] ?? '#378006'; // Color por defecto si no se encuentra
+
+                        @endphp
+
+                        @foreach($filteredDates as $date)
                             @php
-                                // Obtener todos los días del mes
-                                $firstDayOfMonth = \Carbon\Carbon::now()->startOfMonth();
-                                $lastDayOfMonth = \Carbon\Carbon::now()->endOfMonth();
-                                $dates = \Carbon\CarbonPeriod::create($firstDayOfMonth, $lastDayOfMonth);
 
-                                // Filtrar para obtener solo los días que coinciden con el día de la semana especificado
-                                $filteredDates = collect($dates)->filter(function ($date) use ($horario) {
-                                    return $date->dayOfWeek === $horario['dia'];
-                                });
-
-                                $color = $colorMapping[$clase->tipo_clase['nombre']] ?? '#378006'; // Color por defecto si no se encuentra
+                                // Establecer la hora de inicio y fin en base al horario
+                                $startTime = $date->copy()->setHour($horario['horaInicio'])->setMinute(0);
+                                $endTime = $date->copy()->setHour($horario['horaFin'])->setMinute(0);
 
                             @endphp
-
-                            @foreach($filteredDates as $date)
-                                @php
-
-                                    // Establecer la hora de inicio y fin en base al horario
-                                    $startTime = $date->copy()->setHour($horario['horaInicio'])->setMinute(0);
-                                    $endTime = $date->copy()->setHour($horario['horaFin'])->setMinute(0);
-
-                                @endphp
-                                {
-                                    title: '{{ $clase->nombre }}',
-                                    start: '{{ $startTime }}',
-                                    end: '{{ $endTime }}',
-                                    url: '{{ url('clase/'.$clase->_id) }}',
-                                    color: '{{$color}}',
-                                    classNames : "texto-calendario"
-                                },
-                            @endforeach
+                            {
+                                title: '{{ $clase['clase']['nombre'] }}',
+                                start: '{{ $startTime }}',
+                                end: '{{ $endTime }}',
+                                url: '{{ url('clase/'.$clase->_id) }}',
+                                color: '{{$color}}',
+                                classNames : "texto-calendario"
+                            },
                         @endforeach
                     @endforeach
                 @endforeach
+
             ]
         });
         calendar.render();
