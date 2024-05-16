@@ -25,24 +25,40 @@ class ClaseSeeder extends Seeder
         $gimnasioParlaId = Gimnasio::where('nombre', 'Vitality Parla')->value('_id');
         $gimnasioLeganesId = Gimnasio::where('nombre', 'Vitality Leganes')->value('_id');
 
+        $tipoClaseRel = TipoClase::where('nombre','Relajacion')->first()->toArray();
+        $tipoClaseCar = TipoClase::where('nombre','Cardio')->first()->toArray();
+
         Clase::create([
 
 
             "nombre" => "bike fisico",
-            "tipo_clase" => [
-                [
-                    "tipo_clase_id" => "662e7289174ba290ea075ce2",
-                    "nombre" => "Cardio",
-                    "descripcion" => "Quemar calorias como debe ser",
-                ]
-            ],
+            "tipo_clase" => $tipoClaseCar,
             "gimnasios" => [
                 [
                     "gimnasio_id" => $gimnasioParlaId ,
                     "horario" => [
-                        ["dia" => "lunes", "horaInicio" => "9:00", "horaFin" => "10:00"],
-                        ["dia" => "miercoles", "horaInicio" => "11:00", "horaFin" => "12:00"],
-                        ["dia" => "viernes", "horaInicio" => "18:00", "horaFin" => "19:00"]
+                        ["dia" => 1, "horaInicio" => 9, "horaFin" => 10],
+                        ["dia" => 3, "horaInicio" => 11, "horaFin" => 12],
+                        ["dia" => 5, "horaInicio" => 18, "horaFin" => 19]
+                    ]
+                ]
+            ]
+        ]);
+
+
+
+        Clase::create([
+
+
+            "nombre" => "Yoga",
+            "tipo_clase" => $tipoClaseRel,
+            "gimnasios" => [
+                [
+                    "gimnasio_id" => $gimnasioParlaId ,
+                    "horario" => [
+                        ["dia" => 1, "horaInicio" => 11, "horaFin" => 11],
+                        ["dia" => 3, "horaInicio" => 11, "horaFin" => 12],
+                        ["dia" => 5, "horaInicio" => 18, "horaFin" => 19]
                     ]
                 ]
             ]
@@ -53,19 +69,13 @@ class ClaseSeeder extends Seeder
 
         Clase::create([
             "nombre" => "bike virtual",
-            "tipoClase" => [
-                [
-                    "tipo_clase_id" => "662e7289174ba290ea075ce2",
-                    "nombre" => "Cardio",
-                    "descripcion" => "Quemar calorias como debe ser",
-                ]
-            ],
+            "tipoClase" => $tipoClaseCar,
             "gimnasios" => [
                 [
                     "gimnasio_id" => $gimnasioLeganesId,
                     "horario" => [
-                        ["dia" => "martes", "horaInicio" => "15:00", "horaFin" => "16:00"],
-                        ["dia" => "jueves", "horaInicio" => "11:00", "horaFin" => "12:00"]
+                        ["dia" => 2, "horaInicio" => 15, "horaFin" => 16],
+                        ["dia" => 4, "horaInicio" => 11, "horaFin" => 12]
                     ]
                 ]
             ]
