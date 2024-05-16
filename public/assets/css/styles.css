@@ -49,12 +49,12 @@ p,.textoBoton,input,.texto-menu{
     font-family: "Poppins", sans-serif;
     font-weight: 700;
     font-style: normal;
-
+    font-size: 2rem;
 
     -webkit-text-fill-color: var(--negroLigero);
 
 
-    font-size: 2rem;
+
 }
 
 .texto-negro{
