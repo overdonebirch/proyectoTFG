@@ -33,16 +33,7 @@ class ClaseSeeder extends Seeder
 
             "nombre" => "bike fisico",
             "tipo_clase" => $tipoClaseCar,
-            "gimnasios" => [
-                [
-                    "gimnasio_id" => $gimnasioParlaId ,
-                    "horario" => [
-                        ["dia" => 1, "horaInicio" => 9, "horaFin" => 10],
-                        ["dia" => 3, "horaInicio" => 11, "horaFin" => 12],
-                        ["dia" => 5, "horaInicio" => 18, "horaFin" => 19]
-                    ]
-                ]
-            ]
+
         ]);
 
 
@@ -52,16 +43,7 @@ class ClaseSeeder extends Seeder
 
             "nombre" => "Yoga",
             "tipo_clase" => $tipoClaseRel,
-            "gimnasios" => [
-                [
-                    "gimnasio_id" => $gimnasioParlaId ,
-                    "horario" => [
-                        ["dia" => 1, "horaInicio" => 11, "horaFin" => 11],
-                        ["dia" => 3, "horaInicio" => 11, "horaFin" => 12],
-                        ["dia" => 5, "horaInicio" => 18, "horaFin" => 19]
-                    ]
-                ]
-            ]
+
         ]);
 
 
@@ -69,16 +51,7 @@ class ClaseSeeder extends Seeder
 
         Clase::create([
             "nombre" => "bike virtual",
-            "tipoClase" => $tipoClaseCar,
-            "gimnasios" => [
-                [
-                    "gimnasio_id" => $gimnasioLeganesId,
-                    "horario" => [
-                        ["dia" => 2, "horaInicio" => 15, "horaFin" => 16],
-                        ["dia" => 4, "horaInicio" => 11, "horaFin" => 12]
-                    ]
-                ]
-            ]
+            "tipo_clase" => $tipoClaseCar,
         ]);
     }
 }

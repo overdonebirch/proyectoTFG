@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Clase;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Gimnasio;
@@ -14,7 +15,13 @@ class GimnasioSeeder extends Seeder
     public function run(): void
     {
 
+        $bikeFisico = Clase::where("nombre","bike fisico")->first()->toArray();
+        $bikeVirtual = Clase::where("nombre","bike virtual")->first()->toArray();
+        $yoga = Clase::where("nombre","Yoga")->first()->toArray();
+
+
         Gimnasio::create([
+
             'nombre' => "Vitality Parla",
             'direccion' => 'Calle Estrella Polar 5',
             'horarios' => [
@@ -29,6 +36,35 @@ class GimnasioSeeder extends Seeder
                 'domingos_y_festivos' => [
                     'apertura' => '9:00',
                     'cierre' => '14:00'
+                ]
+                ],
+            'clases' => [
+
+                [
+                    "clase" => $bikeFisico,
+                    "horario" => [
+                        ["dia" => 1, "horaInicio" => 9, "horaFin" => 10],
+                        ["dia" => 3, "horaInicio" => 11, "horaFin" => 12],
+                        ["dia" => 5, "horaInicio" => 18, "horaFin" => 19]
+                    ]
+                ],
+
+                [
+                    "clase" => $bikeVirtual,
+                    "horario" => [
+                        ["dia" => 1, "horaInicio" => 12, "horaFin" => 13],
+                        ["dia" => 2, "horaInicio" => 11, "horaFin" => 12],
+                        ["dia" => 3, "horaInicio" => 18, "horaFin" => 19]
+                    ]
+                ],
+
+                [
+                    "clase" => $yoga,
+                    "horario" => [
+                        ["dia" => 5, "horaInicio" => 16, "horaFin" => 17],
+                        ["dia" => 6, "horaInicio" => 10, "horaFin" => 11],
+
+                    ]
                 ]
             ]
 
@@ -48,6 +84,36 @@ class GimnasioSeeder extends Seeder
                 'domingos_y_festivos' => [
                     'apertura' => '9:00',
                     'cierre' => '14:00'
+                ]
+            ],
+
+            'clases' => [
+
+                [
+                    "clase" => $bikeFisico,
+                    "horario" => [
+                        ["dia" => 1, "horaInicio" => 9, "horaFin" => 10],
+                        ["dia" => 3, "horaInicio" => 11, "horaFin" => 12],
+                        ["dia" => 5, "horaInicio" => 18, "horaFin" => 19]
+                    ]
+                ],
+
+                [
+                    "clase" => $bikeVirtual,
+                    "horario" => [
+                        ["dia" => 1, "horaInicio" => 12, "horaFin" => 13],
+                        ["dia" => 2, "horaInicio" => 11, "horaFin" => 12],
+                        ["dia" => 3, "horaInicio" => 18, "horaFin" => 19]
+                    ]
+                ],
+
+                [
+                    "clase" => $yoga,
+                    "horario" => [
+                        ["dia" => 5, "horaInicio" => 16, "horaFin" => 17],
+                        ["dia" => 6, "horaInicio" => 10, "horaFin" => 11],
+
+                    ]
                 ]
             ]
 
@@ -69,7 +135,40 @@ class GimnasioSeeder extends Seeder
                     'apertura' => '9:00',
                     'cierre' => '14:00'
                 ]
+            ],
+
+            'clases' => [
+
+                [
+                    "clase" => $bikeFisico,
+                    "horario" => [
+                        ["dia" => 1, "horaInicio" => 9, "horaFin" => 10],
+                        ["dia" => 3, "horaInicio" => 11, "horaFin" => 12],
+                        ["dia" => 5, "horaInicio" => 18, "horaFin" => 19]
+                    ]
+                ],
+
+                [
+                    "clase" => $bikeVirtual,
+                    "horario" => [
+                        ["dia" => 1, "horaInicio" => 12, "horaFin" => 13],
+                        ["dia" => 2, "horaInicio" => 11, "horaFin" => 12],
+                        ["dia" => 3, "horaInicio" => 18, "horaFin" => 19]
+                    ]
+                ],
+
+                [
+                    "clase" => $yoga,
+                    "horario" => [
+                        ["dia" => 5, "horaInicio" => 16, "horaFin" => 17],
+                        ["dia" => 6, "horaInicio" => 10, "horaFin" => 11],
+
+                    ]
+                ]
             ]
+
+
+
 
         ]);
 
