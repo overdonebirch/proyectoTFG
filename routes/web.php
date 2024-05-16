@@ -35,7 +35,7 @@ Route::controller(GimnasioController::class)->group(function () {
 
 
 Route::controller(ClaseController::class)->group(function () {
-    Route::get('/clases', 'index');
+    Route::get('/clases', 'index')->name("clases");
 });
 
 Route::controller(UserController::class)->group(function () {
