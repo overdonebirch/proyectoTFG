@@ -39,6 +39,9 @@ Route::controller(ClaseController::class)->group(function () {
 });
 
 Route::controller(UserController::class)->group(function () {
+    Route::get('/login', 'formLogin')->middleware('guest');
+    Route::get('/logout', 'logout');
+    Route::post('/login', 'login')->name('login');
     Route::get('/registro',  'create')->name('formRegistro');
     Route::post('/registro', 'store')->name('registro');
 });
