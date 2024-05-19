@@ -21,7 +21,7 @@ class ClaseController extends Controller
         $clases = $gimnasio->clases;
 
 
-        return view("clases",compact('clases'));
+        return view("clases",compact('clases','gimnasio')); // Paso tambien el gimnasio como parametro para recuperar el id cuando se vaya a reservar una clase
 
     }
 
