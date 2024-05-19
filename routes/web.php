@@ -4,6 +4,7 @@ use App\Http\Controllers\ClaseController;
 use App\Http\Controllers\GimnasioController;
 use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,12 @@ Route::controller(GimnasioController::class)->group(function () {
 Route::controller(ClaseController::class)->group(function () {
     Route::get('/clases', 'index')->name("clases");
 });
+
+Route::controller(ReservaController::class)->group(function () {
+    Route::get('/reservar/{clase}/{fecha}/{horaInicio}/{horaFin}/{gimnasio}', 'create')->name("reservarClase");
+    Route::post('/reservar/{clase}/{fecha}/{horaInicio}/{horaFin}/{gimnasio}/{dniUsuario}', 'store')->name("reservar");
+});
+
 
 Route::controller(UserController::class)->group(function () {
     Route::get('/login', 'formLogin')->middleware('guest');

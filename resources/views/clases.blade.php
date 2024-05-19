@@ -72,12 +72,25 @@
                                 $startTime = $date->copy()->setHour($horario['horaInicio'])->setMinute(0);
                                 $endTime = $date->copy()->setHour($horario['horaFin'])->setMinute(0);
 
+                                //Valores para la ruta de reserva de clases:
+                                $fecha = $date->toDateString();
+                                $id_clase = $clase['clase']['_id'];
+                                $id_gimnasio = $gimnasio->_id;
+
+                                $hora_inicio = $startTime->toTimeString();
+                                $_hora_fin = $endTime->toTimeString();
+
+
+                                $route = route('reservarClase', ['clase' => $clase['clase']['_id'], 'fecha' => $fecha, 'horaInicio' => $hora_inicio,
+                                                            'horaFin' => $_hora_fin, 'gimnasio' => $id_gimnasio]);
+
+
                             @endphp
                             {
                                 title: '{{ $clase['clase']['nombre'] }}',
                                 start: '{{ $startTime }}',
                                 end: '{{ $endTime }}',
-                                url: '{{ url('clase/'.$clase->_id) }}',
+                                url: '{{ $route }}',
                                 color: '{{$color}}',
                                 classNames : "texto-calendario"
                             },
