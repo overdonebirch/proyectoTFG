@@ -12,17 +12,20 @@ class ClaseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $gimnasios = Gimnasio::all();
+        $clases = collect();
+        $selectedGimnasio = null;
 
+        if ($request->has('gimnasio_id')) {
+            $selectedGimnasio = Gimnasio::find($request->input('gimnasio_id'));
+            if ($selectedGimnasio) {
+                $clases = $selectedGimnasio->clases;
+            }
+        }
 
-        $gimnasio = Gimnasio::where('nombre','Vitality Parla')->first();
-
-        $clases = $gimnasio->clases;
-
-
-        return view("clases",compact('clases','gimnasio')); // Paso tambien el gimnasio como parametro para recuperar el id cuando se vaya a reservar una clase
-
+        return view('clases', compact('gimnasios', 'clases', 'selectedGimnasio'));
     }
 
     /**
