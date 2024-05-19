@@ -28,6 +28,15 @@ class PayPalController extends Controller
         $provider->showTotals(config('paypal.total_required'));
         $provider->getAccessToken();
 
+        $usuario = User::where("dni",$request->dni)->first();
+        $email = User::where("email",$request->email)->first();
+
+        if($usuario != null){
+            return redirect()->back()->with("error", "El dni ya está registrado en el sistema");
+        }
+        else if($email != null){
+            return redirect()->back()->with("error", "El email ya está registrado en el sistema");
+        }
 
         $plan_id = $request->plan_id;
         return $this->createSuscription($plan_id,$request);
