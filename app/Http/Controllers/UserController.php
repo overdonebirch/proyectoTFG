@@ -6,7 +6,9 @@ use App\Models\Gimnasio;
 use App\Models\Membresia;
 use App\Models\Plan;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -21,6 +23,31 @@ class UserController extends Controller
         return $users;
     }
 
+    public function formLogin(){
+        return view("auth.login");
+    }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            // Redirigir al usuario a la ruta de inicio después de iniciar sesión correctamente
+            return redirect()->intended('/inicio')->with('success', 'Logado correctamente');
+        }
+
+        // Si las credenciales son incorrectas, redirigir de vuelta al formulario de login con un mensaje de error
+        return redirect()->back()->with('error', 'Credenciales Incorrectas.');
+    }
+    public function logout(Request $request)
+    {
+        Auth::logout();  // Cierra la sesión del usuario autenticado
+
+        $request->session()->invalidate();  // Invalida la sesión actual
+        $request->session()->regenerateToken();  // Regenera el token CSRF
+
+        return redirect('/inicio')->with('success', 'Has cerrado sesión correctamente');
+    }
     /**
      * Show the form for creating a new resource.
      */
