@@ -22,6 +22,9 @@ A continuación, en el fichero config/database.php añadimos esto en el array 'c
             'database' => env('MONGODB_DATABASE', 'gimnasio'),
         ],
 
+## Instalar FullCalendar (para calendarios de clases) :
+
+npm install fullcalendar
 
 ## Paquetes requeridos : 
 
