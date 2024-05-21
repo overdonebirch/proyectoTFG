@@ -41,7 +41,8 @@ Route::controller(ClaseController::class)->group(function () {
 
 Route::controller(ReservaController::class)->group(function () {
     Route::get('/reservar/{clase}/{fecha}/{horaInicio}/{horaFin}/{gimnasio}', 'create')->name("reservarClase");
-    Route::post('/reservar/{clase}/{fecha}/{horaInicio}/{horaFin}/{gimnasio}/{dniUsuario}', 'store')->name("reservar");
+    Route::get('/reservar/{clase}/{fecha}/{horaInicio}/{horaFin}/{gimnasio}/{dniUsuario}', 'store')->name("reservar");
+    Route::get('/reservarNoUsuario/{clase}/{fecha}/{horaInicio}/{horaFin}/{gimnasio}/{dniUsuario}', 'reservarNoUsuario')->name("reservarNoUsuario");
 });
 
 
@@ -55,7 +56,9 @@ Route::controller(UserController::class)->group(function () {
 
 Route::controller(PayPalController::class)->group(function () {
     Route::get('/paypal/payment',  'payment')->name('payment');
+    Route::post('/paypal/bookingPayment', 'bookingPayment')->name('bookingPayment');
     Route::get('/paypal/success', 'success')->name('success');
+    Route::get('/paypal/bookingSuccess', 'bookingSuccess')->name('bookingSuccess');
     Route::get('/paypal/cancel', 'cancel')->name('cancel');
 });
 
