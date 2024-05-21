@@ -6,6 +6,7 @@ use App\Models\Gimnasio;
 use App\Models\Membresia;
 use App\Models\Plan;
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,15 +69,19 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
-        User::create([
-            'nombre' => $request->nombre,
-            'email' => $request->email,
-            'dni' => $request->dni,
-            'password' => Hash::make($request->password),
-            'id_gimnasio' => $request->id_gimnasio,
+        try{
+            User::create([
+                'nombre' => $request->nombre,
+                'email' => $request->email,
+                'dni' => $request->dni,
+                'password' => Hash::make($request->password),
+                'id_gimnasio' => $request->id_gimnasio,
 
-        ]);
-
+            ]);
+        }
+        catch(Exception $e){
+            return redirect('formRegistro')->with("error",$e->getMessage());
+        }
         return redirect('inicio')->with('success', 'Usuario Registrado');
 
     }
