@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Clase;
 use App\Models\Gimnasio;
+use App\Models\Reserva;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
+
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -30,6 +33,9 @@ class ReservaController extends Controller
 
         }
 
+        $reservationsCount = Reserva::where('id_clase', $clase->_id)->where('fecha', $fecha)->where('hora_inicio',$horaInicio)->where('hora_fin',$horaFin)->count();
+
+
         return view("reservarClase",compact("clase","fecha","horaInicio","horaFin","gimnasio","dni"));
 
     }
@@ -37,7 +43,48 @@ class ReservaController extends Controller
     public function store(Request $request, Clase $clase, String $fecha, String $horaInicio, String $horaFin,Gimnasio $gimnasio,String $dniUsuario)
     {
 
+        if($dniUsuario == "*"){
+            return redirect(route('reservarNoUsuario', ['clase' => $clase->_id, 'fecha' => $fecha, 'horaInicio' => $horaInicio,'horaFin' => $horaFin, 'gimnasio' => $gimnasio->_id, "dniUsuario" => $dniUsuario]));
+        }
+        else {
 
+            $reserva = new Reserva();
+
+            $reserva->dni_usuario = $dniUsuario;
+            $reserva->id_clase = $clase->_id;
+            $reserva->id_gimnasio = $gimnasio->_id;
+            $reserva->fecha = $fecha;
+            $reserva->hora_inicio = $horaInicio;
+            $reserva->hora_fin = $horaFin;
+
+
+
+
+            try{
+                $reserva->save();
+            }
+            catch(Exception  $e){
+                return redirect()->back()->with("error", "Ya existe una reserva con los mismos datos");
+            }
+
+
+            return redirect('inicio')->with("success","clase reservada correctamente");
+        }
+
+
+
+    }
+
+    public function reservarNoUsuario(Request $request, Clase $clase, String $fecha, String $horaInicio, String $horaFin,Gimnasio $gimnasio)
+    {
+        $dni = "*";
+
+
+
+        $reservationsCount = Reserva::where('id_clase', $clase->_id)->where('fecha', $fecha)->where('hora_inicio',$horaInicio)->where('hora_fin',$horaFin)->count();
+        $precio = 10;
+
+        return view("reservaClaseNoUsuario",compact("clase","fecha","horaInicio","horaFin","gimnasio","dni","precio","request"));
 
     }
 
