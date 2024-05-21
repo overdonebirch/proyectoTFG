@@ -77,12 +77,12 @@ class ReservaController extends Controller
 
     public function reservarNoUsuario(Request $request, Clase $clase, String $fecha, String $horaInicio, String $horaFin,Gimnasio $gimnasio)
     {
+
+
         $dni = "*";
 
-
-
         $reservationsCount = Reserva::where('id_clase', $clase->_id)->where('fecha', $fecha)->where('hora_inicio',$horaInicio)->where('hora_fin',$horaFin)->count();
-        $precio = 10;
+        $precio = $clase->tipo_clase["costo_unico"];;
 
         return view("reservaClaseNoUsuario",compact("clase","fecha","horaInicio","horaFin","gimnasio","dni","precio","request"));
 

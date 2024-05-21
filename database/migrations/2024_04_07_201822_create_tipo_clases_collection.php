@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-
-
         Schema::create('tipo_clases', function (Blueprint $collection) {
             $collection->string("nombre");
             $collection->string("descripcion");
             $collection->boolean("clase_premium");
+            $collection->double("costo_unico");
         });
 
         Schema::table('tipo_clases', function (Blueprint $table) {
