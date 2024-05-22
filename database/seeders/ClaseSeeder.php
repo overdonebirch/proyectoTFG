@@ -27,31 +27,42 @@ class ClaseSeeder extends Seeder
 
         $tipoClaseRel = TipoClase::where('nombre','Relajacion')->first()->toArray();
         $tipoClaseCar = TipoClase::where('nombre','Cardio')->first()->toArray();
-
-        Clase::create([
-
-
-            "nombre" => "bike fisico",
-            "tipo_clase" => $tipoClaseCar,
-
-        ]);
-
+        $tipoClaseTon = TipoClase::where('nombre','Tonificar')->first()->toArray();
 
 
         Clase::create([
 
 
-            "nombre" => "Yoga",
-            "tipo_clase" => $tipoClaseRel,
+            "nombre" => "Crossfit",
+            "tipo_clase" => $tipoClaseTon,
 
         ]);
 
 
+        // Clase::create([
 
 
-        Clase::create([
-            "nombre" => "bike virtual",
-            "tipo_clase" => $tipoClaseCar,
-        ]);
+        //     "nombre" => "bike fisico",
+        //     "tipo_clase" => $tipoClaseCar,
+
+        // ]);
+
+
+
+        // Clase::create([
+
+
+        //     "nombre" => "Yoga",
+        //     "tipo_clase" => $tipoClaseRel,
+
+        // ]);
+
+
+
+
+        // Clase::create([
+        //     "nombre" => "bike virtual",
+        //     "tipo_clase" => $tipoClaseCar,
+        // ]);
     }
 }

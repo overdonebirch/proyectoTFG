@@ -23,7 +23,7 @@
         <a href="{{route ('clases')}}"type="button" class="btn boton justify-content-center textoBoton color-principal">Volver</a>
 
 
-        <form method="POST" action="{{route('bookingPayment')}}">
+        <form method="POST" id="reservarForm" action="{{route('bookingPayment')}}">
 
             @csrf
             <input type="hidden" name="id_clase" value="{{ $clase->_id }}">
@@ -44,11 +44,29 @@
 </section>
 
 <script>
-    document.querySelector('form').addEventListener('submit', function () {
+    document.getElementById('reservarForm').addEventListener('submit', function (event) {
         var dni = document.getElementById('dniNoUsuario').value;
-        document.getElementById('dniHidden').value = dni;
+        var regex = /^[XYZ0-9][0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKE]$/i;
+
+        if (!regex.test(dni)) {
+            event.preventDefault(); // Evita que el formulario se envíe si la validación falla
+            let mensaje = document.createElement("p");
+            mensaje.innerHTML = "El DNI no tiene el formato correcto";
+            mensaje.style.backgroundColor = 'red';
+            mensaje.style.height = '100%';
+            mensaje.style.width = '100%';
+            mensaje.classList.add("centrar")
+            let mensajes = document.getElementById("mensajes");
+            mensajes.appendChild(mensaje);
+            setTimeout(() => {
+                mensajes.innerHTML = "";
+            }, 3000);
+        } else {
+            document.getElementById('dniHidden').value = dni;
+        }
     });
 </script>
+
 
 
 @endsection
