@@ -46,12 +46,6 @@ class PayPalController extends Controller
 
     public function bookingPayment(Request $request){
 
-        $usuario = Reserva::where("dni_usuario",$request->dni_usuario)->first();
-
-        if($usuario != null){
-            return redirect()->back()->with("error", "Ya esxiste una reserva con ese dni");
-        }
-
 
         $route = route('reservar', ['clase' => $request->id_clase, 'fecha' => $request->fecha, 'horaInicio' => $request->horaInicio,
         'horaFin' =>  $request->horaFin, 'gimnasio' => $request->id_gimnasio, "dniUsuario" => $request->dni_usuario]);
