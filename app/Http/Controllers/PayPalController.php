@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Membresia;
 use App\Models\Plan;
 use App\Models\Product;
+use App\Models\Reserva;
 use App\Models\Suscripcion;
 use App\Models\User;
 use App\Subscriptions\PayPalSubscription;
@@ -44,6 +45,13 @@ class PayPalController extends Controller
     }
 
     public function bookingPayment(Request $request){
+
+        $usuario = Reserva::where("dni_usuario",$request->dni_usuario)->first();
+
+        if($usuario != null){
+            return redirect()->back()->with("error", "Ya esxiste una reserva con ese dni");
+        }
+
 
         $route = route('reservar', ['clase' => $request->id_clase, 'fecha' => $request->fecha, 'horaInicio' => $request->horaInicio,
         'horaFin' =>  $request->horaFin, 'gimnasio' => $request->id_gimnasio, "dniUsuario" => $request->dni_usuario]);

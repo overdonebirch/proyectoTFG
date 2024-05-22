@@ -17,12 +17,10 @@ use function PHPUnit\Framework\isEmpty;
 class ReservaController extends Controller
 {
 
-    public function index()
-    {
+    public function index(){
     }
 
-    public function create(Request $request, Clase $clase, String $fecha, String $horaInicio, String $horaFin,Gimnasio $gimnasio)
-    {
+    public function create(Request $request, Clase $clase, String $fecha, String $horaInicio, String $horaFin,Gimnasio $gimnasio){
         $dni = "*";
 
         $user = Auth::user();
@@ -40,8 +38,7 @@ class ReservaController extends Controller
 
     }
 
-    public function store(Request $request, Clase $clase, String $fecha, String $horaInicio, String $horaFin,Gimnasio $gimnasio,String $dniUsuario)
-    {
+    public function store(Request $request, Clase $clase, String $fecha, String $horaInicio, String $horaFin,Gimnasio $gimnasio,String $dniUsuario){
 
         if($dniUsuario == "*"){
             return redirect(route('reservarNoUsuario', ['clase' => $clase->_id, 'fecha' => $fecha, 'horaInicio' => $horaInicio,'horaFin' => $horaFin, 'gimnasio' => $gimnasio->_id, "dniUsuario" => $dniUsuario]));
@@ -56,9 +53,6 @@ class ReservaController extends Controller
             $reserva->fecha = $fecha;
             $reserva->hora_inicio = $horaInicio;
             $reserva->hora_fin = $horaFin;
-
-
-
 
             try{
                 $reserva->save();
@@ -75,9 +69,7 @@ class ReservaController extends Controller
 
     }
 
-    public function reservarNoUsuario(Request $request, Clase $clase, String $fecha, String $horaInicio, String $horaFin,Gimnasio $gimnasio)
-    {
-
+    public function reservarNoUsuario(Request $request, Clase $clase, String $fecha, String $horaInicio, String $horaFin,Gimnasio $gimnasio){
 
         $dni = "*";
 
