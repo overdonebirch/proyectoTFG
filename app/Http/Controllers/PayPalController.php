@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Subscriptions\PayPalSubscription;
 use App\Plans\PayPalPlan;
 use App\Products\PayPalProduct;
+use App\Bookings\PayPalBooking;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Carbon\Carbon;
@@ -19,14 +20,6 @@ use Exception;
 class PayPalController extends Controller
 {
     public function payment(Request $request){
-
-        $provider = new PayPalClient;
-
-        $provider->setApiCredentials(config('paypal'));
-        $provider->setCurrency('EUR');
-        $provider->getAccessToken();
-        $provider->showTotals(config('paypal.total_required'));
-        $provider->getAccessToken();
 
         $usuario = User::where("dni",$request->dni)->first();
         $email = User::where("email",$request->email)->first();
@@ -47,85 +40,18 @@ class PayPalController extends Controller
     public function bookingPayment(Request $request){
 
 
-        $route = route('reservar', ['clase' => $request->id_clase, 'fecha' => $request->fecha, 'horaInicio' => $request->horaInicio,
-        'horaFin' =>  $request->horaFin, 'gimnasio' => $request->id_gimnasio, "dniUsuario" => $request->dni_usuario]);
+        $booking = new PayPalBooking();
 
-        $data = [
-
-            "intent" => "CAPTURE",
-            "purchase_units" => [
-                [
-                    "amount" => [
-                        "currency_code" => "EUR",
-                        "value" => $request->precio
-                    ]
-                ]
-            ],
-            "payment_source" => [
-                "paypal" => [
-                  "experience_context" => [
-                    "payment_method_preference" => "IMMEDIATE_PAYMENT_REQUIRED",
-                    "locale" => "es-ES",
-                    "user_action" => "PAY_NOW",
-                    "return_url" => $route,
-                    "cancel_url" => route('cancel')
-                  ]
-                ]
-
-            ]
-        ];
-
-        $provider = new PayPalClient;
-
-        $provider->setApiCredentials(config('paypal'));
-        $provider->setCurrency('EUR');
-        $provider->getAccessToken();
-        $provider->showTotals(config('paypal.total_required'));
-        $provider->getAccessToken();
-
-        $response = $provider->createOrder($data);
-
-
-        if (isset($response['id']) && $response['id'] != null) {
-
-            foreach ($response['links'] as $link) {
-                if ($link['rel'] == 'payer-action') {
-
-                    $request->session()->put('id_clase', $request->id_clase);
-                    $request->session()->put('fecha', $request->fecha);
-                    $request->session()->put('horaInicio', $request->horaInicio);
-                    $request->session()->put('horaFin', $request->horaFin);
-                    $request->session()->put('dni_usuario', $request->dni_usuario);
-                    $request->session()->put('id_gimnasio', $request->id_gimnasio);
-
-
-                    return redirect()
-                    ->away($link['href'])
-                    ->withInput();
-
-                }
-            }
-
-            return redirect()
-                ->route('inicio')
-                ->with('error', 'Something went wrong.');
-        } else {
-            return redirect()
-                ->route('inicio')
-                ->with('error', $response['message'] ?? 'Response id doesnt exist');
-        }
+        return $booking->createOrder($request);
 
 
     }
 
     public function bookingSuccess(Request $request){
 
-
-        // $route = route('reservar', ['clase' => $request->session()->get('id_clase'), 'fecha' => $request->session()->get('fecha'), 'horaInicio' => $request->session()->get('horaInicio'),
-        //                             'horaFin' =>  $request->session()->get('horaFin'), 'gimnasio' => $request->session()->get('id_gimnasio'), "dniUsuario" => $request->session()->get('dni_usuario')]);
-
         return redirect(route('reservar', ['clase' => $request->session()->get('id_clase'), 'fecha' => $request->session()->get('fecha'), 'horaInicio' => $request->session()->get('horaInicio'),
         'horaFin' =>  $request->session()->get('horaFin'), 'gimnasio' => $request->session()->get('id_gimnasio'), "dniUsuario" => $request->session()->get('dni_usuario')]));
+
     }
     public function createSuscription($plan_id,$request){
 
