@@ -17,7 +17,7 @@
         </div>
         <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label text-white">Email:</label>
-            <input type="email" class="form-control w-100 texto-negro" step="any" id="formGroupExampleInput" name="email" min="0" placeholder="email">
+            <input type="text" class="form-control w-100 texto-negro" step="any" id="email" name="email" min="0" placeholder="email">
         </div>
         <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label text-white">Dni:</label>
@@ -64,13 +64,21 @@
     const planes = {!! json_encode($planes) !!};
 
     document.querySelector('form').addEventListener('submit', function (event) {
-        var dni = document.getElementById('dni').value;
-        var regex = /^[XYZ0-9][0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKE]$/i;
 
-        if (!regex.test(dni)) {
+        var dni = document.getElementById('dni').value;
+        var email = document.getElementById('email').value;
+        var regex = /^[XYZ0-9][0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKE]$/i;
+        var regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        var mensajeMostrado = "";
+
+        if (!regex.test(dni) || !regexEmail.test(email) ) {
+
+            if(!regex.test(dni) ){mensajeMostrado = "El fomrato del documento de identidad no es valido"}
+            else if(!regexEmail.test(email) ){mensajeMostrado = "El fomrato del email no es valido"}
+
             event.preventDefault(); // Evita que el formulario se envíe si la validación falla
             let mensaje = document.createElement("p");
-            mensaje.innerHTML = "El DNI no tiene el formato correcto";
+            mensaje.innerHTML = mensajeMostrado;
             mensaje.style.backgroundColor = 'red';
             mensaje.style.height = '100%';
             mensaje.style.width = '100%';
