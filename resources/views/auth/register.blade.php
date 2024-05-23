@@ -37,10 +37,13 @@
         </div>
         <div class="mb-3">
             <label for="categoria" class="form-label text-white">Elige tu membresía: </label>
-            <select class="form-select w-100" name="id_membresia" id="membresia">
+
+            <select class="form-select w-100" name="id_membresia" id="membresia" value="none">
+                <option disabled selected value> -- select an option -- </option>
                 @foreach ($membresias as $m)
                     <option value="{{ $m->id }}">{{ $m->nombre }}</option>
                 @endforeach
+
             </select>
         </div>
 
@@ -56,12 +59,9 @@
 </form>
 
 
-{{-- Cambiar los precios mostrados:  --}}
 <script>
-    const selectMembresia = document.getElementById('membresia');
-    const preciosDiv = document.getElementById('precios-div');
-    const selectPrecios = document.getElementById('plan');
-    const planes = {!! json_encode($planes) !!};
+
+    // Validar si el dni o email son correctos
 
     document.querySelector('form').addEventListener('submit', function (event) {
 
@@ -90,6 +90,15 @@
             }, 3000);
         }
     });
+
+
+    // Mostrar precios segun el plan que se elja
+
+    const selectMembresia = document.getElementById('membresia');
+    const preciosDiv = document.getElementById('precios-div');
+    const selectPrecios = document.getElementById('plan');
+    const planes = {!! json_encode($planes) !!};
+    selectMembresia.selectedIndex = -1; // Hacer que la opcion marcada por defecto esté en blanco
 
     selectMembresia.addEventListener('change', function() {
         const selectedMembresiaName = selectMembresia.options[selectMembresia.selectedIndex].text.toLowerCase();
