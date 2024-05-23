@@ -21,7 +21,7 @@
         </div>
         <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label text-white">Dni:</label>
-            <input type="text" class="form-control w-100 texto-negro" step="any" id="formGroupExampleInput" name="dni" min="0" placeholder="dni">
+            <input type="text" class="form-control w-100 texto-negro" step="any" id="dni" name="dni" min="0" placeholder="dni">
         </div>
         <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label text-white">Password:</label>
@@ -62,6 +62,26 @@
     const preciosDiv = document.getElementById('precios-div');
     const selectPrecios = document.getElementById('plan');
     const planes = {!! json_encode($planes) !!};
+
+    document.querySelector('form').addEventListener('submit', function (event) {
+        var dni = document.getElementById('dni').value;
+        var regex = /^[XYZ0-9][0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKE]$/i;
+
+        if (!regex.test(dni)) {
+            event.preventDefault(); // Evita que el formulario se envíe si la validación falla
+            let mensaje = document.createElement("p");
+            mensaje.innerHTML = "El DNI no tiene el formato correcto";
+            mensaje.style.backgroundColor = 'red';
+            mensaje.style.height = '100%';
+            mensaje.style.width = '100%';
+            mensaje.classList.add("centrar")
+            let mensajes = document.getElementById("mensajes");
+            mensajes.appendChild(mensaje);
+            setTimeout(() => {
+                mensajes.innerHTML = "";
+            }, 3000);
+        }
+    });
 
     selectMembresia.addEventListener('change', function() {
         const selectedMembresiaName = selectMembresia.options[selectMembresia.selectedIndex].text.toLowerCase();
