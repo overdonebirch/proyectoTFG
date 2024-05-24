@@ -132,6 +132,7 @@ class PayPalController extends Controller
 
         $id_membresia = $request->session()->get('id_membresia');
         $membresia = Membresia::where("_id",$id_membresia)->first();
+        $fecha_actual = Carbon::today()->toDateString();
 
         $user = User::create([
 
@@ -141,6 +142,7 @@ class PayPalController extends Controller
             'dni' => $request->session()->get('dni'),
             'password' => $request->session()->get('password'),
             'id_gimnasio' => $request->session()->get('id_gimnasio'),
+            'fecha_registro' => $fecha_actual,
             'membresia' => $membresia->toArray(),
 
 

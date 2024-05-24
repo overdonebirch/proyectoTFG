@@ -29,9 +29,7 @@ class User extends Authenticatable
         'password',
         'id_gimnasio',
         'membresia',
-        'fechainicio_membresía',
-        'fechafin_membresía',
-        'periodicidad_pago'
+        'fecha_registro',
 
     ];
 

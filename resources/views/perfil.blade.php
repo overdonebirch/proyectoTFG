@@ -27,6 +27,11 @@
             <p class="texto-negro">Gimnasio:  </p>
             <p class="texto-negro texto-color-secundario" style="padding-left: 10px "> {{ $gimnasio->nombre }} </p>
         </div>
+
+        <div class="d-flex">
+            <p class="texto-negro">Cliente desde:  </p>
+            <p class="texto-negro texto-color-secundario" style="padding-left: 10px "> {{ $user->fecha_registro }} </p>
+        </div>
     </div>
 
 

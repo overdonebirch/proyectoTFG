@@ -21,8 +21,8 @@ return new class extends Migration
             $collection->string('password');
             $collection->objectId('id_gimnasio');
             $collection->json('membresia');
-            $collection->string('fechainicio_membresía');
-            $collection->string('fechafin_membresía');
+            $collection->string('fecha_registro');
+
 
         });
 

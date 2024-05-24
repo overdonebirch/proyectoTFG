@@ -6,6 +6,7 @@ use App\Models\Gimnasio;
 use App\Models\Membresia;
 use App\Models\Plan;
 use App\Models\User;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
@@ -25,13 +26,16 @@ class UserController extends Controller
     }
 
     public function formLogin(){
+
         return view("auth.login");
+
     }
 
 
     public function perfil(){
 
         $user = Auth::user();
+
         $gimnasio = Gimnasio::where("_id",$user->id_gimnasio)->first();
 
         return view("perfil",compact('user','gimnasio'));
@@ -69,6 +73,7 @@ class UserController extends Controller
 
 
         return view('auth.register',compact('gimnasios','membresias','planes'));
+
     }
 
 
