@@ -277,6 +277,11 @@ p,.textoBoton,input,.texto-menu{
 
 /********IMAGENES ******/
 
+.imagen-perfil{
+    height: 80%;
+    width: 30%;
+}
+
 .imagenFondo{
     background-image: url('/assets/img/GrupoEjercitando.jpg');
     background-size: cover;

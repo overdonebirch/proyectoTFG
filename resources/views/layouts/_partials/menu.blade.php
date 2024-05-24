@@ -13,7 +13,7 @@
 
             @auth
                 <div class="col-md-2 d-flex justify-content-md-end justify-content-center mt-md-0 mt-3">
-                    <a href="" type="button" class="btn boton justify-content-center textoBoton color-principal">Ver Perfil</a>
+                    <a href="{{route('perfil')}}" type="button" class="btn boton justify-content-center textoBoton color-principal">Ver Perfil</a>
                 </div>
 
                 <div class="col-md-2 d-flex justify-content-md-start justify-content-center mt-md-0 mt-3">

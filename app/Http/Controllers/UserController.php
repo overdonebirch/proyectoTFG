@@ -28,6 +28,15 @@ class UserController extends Controller
         return view("auth.login");
     }
 
+
+    public function perfil(){
+
+        $user = Auth::user();
+        $gimnasio = Gimnasio::where("_id",$user->id_gimnasio)->first();
+
+        return view("perfil",compact('user','gimnasio'));
+    }
+
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
