@@ -21,15 +21,17 @@ class PayPalController extends Controller
 {
     public function payment(Request $request){
 
-        $usuario = User::where("dni",$request->dni)->first();
-        $email = User::where("email",$request->email)->first();
+        $usuarioDni = User::where("dni",strtoupper($request->dni))->first();
+        $usuarioEmail = User::where("email",strtolower($request->email))->first();
 
-        if($usuario != null){
+        if($usuarioDni != null){
+
             return redirect()->back()->with("error", "El dni ya está registrado en el sistema");
         }
-        else if($email != null){
+        else if($usuarioEmail != null){
             return redirect()->back()->with("error", "El email ya está registrado en el sistema");
         }
+
 
         $plan_id = $request->plan_id;
         return $this->createSuscription($plan_id,$request);
@@ -138,8 +140,8 @@ class PayPalController extends Controller
 
             'nombre' => $request->session()->get('nombre'),
             'apellidos' => $request->session()->get('apellidos'),
-            'email' => $request->session()->get('email'),
-            'dni' => $request->session()->get('dni'),
+            'email' => strtolower($request->session()->get('email')),
+            'dni' => strtoupper($request->session()->get('dni')),
             'password' => $request->session()->get('password'),
             'id_gimnasio' => $request->session()->get('id_gimnasio'),
             'fecha_registro' => $fecha_actual,
