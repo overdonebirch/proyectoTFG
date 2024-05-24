@@ -21,9 +21,11 @@ class ReservaController extends Controller
     }
 
     public function create(Request $request, Clase $clase, String $fecha, String $horaInicio, String $horaFin,Gimnasio $gimnasio){
+
         $dni = "*";
 
         $user = Auth::user();
+
 
         if ($user) {
 
@@ -32,9 +34,15 @@ class ReservaController extends Controller
         }
 
         $reservationsCount = Reserva::where('id_clase', $clase->_id)->where('fecha', $fecha)->where('hora_inicio',$horaInicio)->where('hora_fin',$horaFin)->count();
+        $vacantes = $this->getVacantes($clase->_id,$gimnasio);
 
+        $vacantesDisponibles = $vacantes - $reservationsCount;
 
-        return view("reservarClase",compact("clase","fecha","horaInicio","horaFin","gimnasio","dni"));
+        if( $vacantesDisponibles <= 0) {
+            return redirect()->back()->with("error","Se han acabado las vacantes para esta clase");
+        }
+
+        return view("reservarClase",compact("clase","fecha","horaInicio","horaFin","gimnasio","dni","vacantesDisponibles"));
 
     }
 
@@ -58,7 +66,7 @@ class ReservaController extends Controller
                 $reserva->save();
             }
             catch(Exception  $e){
-                return redirect()->back()->with("error", "Ya existe una reserva con los mismos datos");
+                return redirect('clases')->with("error", "Ya existe una reserva con los mismos datos");
             }
 
 
@@ -73,12 +81,26 @@ class ReservaController extends Controller
 
         $dni = "*";
 
-        $reservationsCount = Reserva::where('id_clase', $clase->_id)->where('fecha', $fecha)->where('hora_inicio',$horaInicio)->where('hora_fin',$horaFin)->count();
-        $precio = $clase->tipo_clase["costo_unico"];;
+        $reservationsCount = Reserva::where('id_clase', $clase->_id)->where('fecha', $fecha)
+                            ->where('hora_inicio',$horaInicio)->where('hora_fin',$horaFin)->where("id_gimnasio",$gimnasio->_id)->count();
+                            $precio = $clase->tipo_clase["costo_unico"];;
 
         return view("reservaClaseNoUsuario",compact("clase","fecha","horaInicio","horaFin","gimnasio","dni","precio","request"));
 
     }
 
+
+    private function getVacantes( String $claseId, Gimnasio $gimnasio)
+    {
+
+        // Recorrer las clases del gimnasio
+        foreach ($gimnasio->clases as $clase) {
+            if ($clase['clase']['_id'] == $claseId) {
+                return $clase['vacantes'];
+            }
+        }
+
+        return response()->json(['message' => 'Clase no encontrada en este gimnasio'], 404);
+    }
 
 }

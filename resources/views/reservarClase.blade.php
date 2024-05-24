@@ -32,6 +32,11 @@
     </div>
 
     <div class="col-lg-12 d-flex justify-content-center " >
+        <p class="texto-negro">Vacantes dispnibles: </p>
+        <p class="texto-negro texto-color-principal" style="padding-left: 10px "> {{$vacantesDisponibles}}</p>
+    </div>
+
+    <div class="col-lg-12 d-flex justify-content-center " >
 
         <a href="{{route ('clases')}}"type="button" class="btn boton justify-content-center textoBoton color-principal">Volver</a>
 
