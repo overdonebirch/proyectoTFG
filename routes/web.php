@@ -40,9 +40,10 @@ Route::controller(ClaseController::class)->group(function () {
 });
 
 Route::controller(ReservaController::class)->group(function () {
-    Route::get('/reservar/{clase}/{fecha}/{horaInicio}/{horaFin}/{gimnasio}', 'create')->name("reservarClase");
+    Route::get('/reservarClase/{clase}/{fecha}/{horaInicio}/{horaFin}/{gimnasio}', 'create')->name("reservarClase")->middleware('booking');
     Route::get('/reservar/{clase}/{fecha}/{horaInicio}/{horaFin}/{gimnasio}/{dniUsuario}', 'store')->name("reservar");
-    Route::get('/reservarNoUsuario/{clase}/{fecha}/{horaInicio}/{horaFin}/{gimnasio}/{dniUsuario}', 'reservarNoUsuario')->name("reservarNoUsuario");
+    Route::get('/reservarNoUsuario/{clase}/{fecha}/{horaInicio}/{horaFin}/{gimnasio}', 'reservarNoUsuario')->name("reservarNoUsuario");
+    Route::post('/verificarReservaNoUsuario','verificarReservaNoUsuario')->name("verificarReservaNoUsuario");
 });
 
 
