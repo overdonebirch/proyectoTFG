@@ -29,6 +29,16 @@ class ReservaController extends Controller
 
         if ($user) {
 
+            if($user->id_gimnasio != $gimnasio->_id){
+
+                return redirect()->back()->with("error","No estás inscrito en este gimnasio");
+
+            }
+            else if(!$user->membresia["acceso_clases_premium"] && $clase->tipo_clase["clase_premium"]){
+                return redirect()->back()->with("error","Tu membresía no permite acceso a esta clase (se requiere membresía Premium)");
+            }
+
+
             $dni = $user->dni;
 
         }
