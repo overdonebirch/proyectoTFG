@@ -46,7 +46,7 @@
 
         @endphp
 
-        <form method="GET" action="{{$route}}">
+        <form method="POST" action="{{$route}}">
             @csrf
             <button type="submit "class="btn boton justify-content-center textoBoton color-secundario" style="margin-left: 10px"> Reservar </button>
         </form>
