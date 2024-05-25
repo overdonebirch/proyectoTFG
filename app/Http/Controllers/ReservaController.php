@@ -43,7 +43,7 @@ class ReservaController extends Controller
 
         $reserva = new Reserva();
 
-        $reserva->dni_usuario = $dniUsuario;
+        $reserva->dni_usuario = strtoupper($dniUsuario);
         $reserva->id_clase = $clase->_id;
         $reserva->id_gimnasio = $gimnasio->_id;
         $reserva->fecha = $fecha;
@@ -81,7 +81,7 @@ class ReservaController extends Controller
 
     public function verificarReservaNoUsuario(Request $request)
     {
-        $dni = $request->input('dni_usuario');
+        $dni = strtoupper($request->input('dni_usuario'));
         $idClase = $request->input('id_clase');
         $fecha = $request->input('fecha');
         $horaInicio = $request->input('horaInicio');
