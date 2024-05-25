@@ -139,33 +139,8 @@ class PayPalController extends Controller
     public function success(Request $request){
 
 
-        $id_membresia = $request->session()->get('id_membresia');
-        $membresia = Membresia::where("_id",$id_membresia)->first();
-        $fecha_actual = Carbon::today()->toDateString();
-
-        $user = User::create([
-
-            'nombre' => $request->session()->get('nombre'),
-            'apellidos' => $request->session()->get('apellidos'),
-            'email' => strtolower($request->session()->get('email')),
-            'dni' => strtoupper($request->session()->get('dni')),
-            'password' => $request->session()->get('password'),
-            'id_gimnasio' => $request->session()->get('id_gimnasio'),
-            'fecha_registro' => $fecha_actual,
-            'membresia' => $membresia->toArray(),
-
-
-        ]);
-
-        Suscripcion::create([
-
-            "id_cliente" => $user->_id,
-            "id_suscripcion" => $request->subscription_id,
-
-        ]);
-
-        return redirect('inicio')->with('success', 'Usuario Registrado');
-
+        $request->session()->put('subscription_id', $request->subscription_id);
+        return redirect()->route('redirectRegister');
 
     }
 

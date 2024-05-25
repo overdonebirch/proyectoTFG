@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Gimnasio;
 use App\Models\Membresia;
 use App\Models\Plan;
+use App\Models\Suscripcion;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
@@ -83,20 +84,55 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
+        $membresia = Membresia::where("_id",$request->id_membresia)->first();
+
         try{
-            User::create([
+            $user = User::create([
                 'nombre' => $request->nombre,
                 'email' => $request->email,
                 'dni' => $request->dni,
                 'password' => Hash::make($request->password),
                 'id_gimnasio' => $request->id_gimnasio,
+                'membresia' => $membresia
+            ]);
+            Suscripcion::create([
+
+                "id_cliente" => $user->_id,
+                "id_suscripcion" => $request->subscription_id,
 
             ]);
+
+            return redirect('inicio')->with('success', 'Usuario Registrado');
+
         }
         catch(Exception $e){
-            return redirect('formRegistro')->with("error",$e->getMessage());
+            return redirect('inicio')->with("error",$e->getMessage());
         }
-        return redirect('inicio')->with('success', 'Usuario Registrado');
+
+
+    }
+
+    public function redirectRegister(Request $request){
+
+        $id_membresia = $request->session()->get('id_membresia');
+
+        $fecha_actual = Carbon::today()->toDateString();
+
+        $params = [
+
+            'nombre' => $request->session()->get('nombre'),
+            'apellidos' => $request->session()->get('apellidos'),
+            'email' => strtolower($request->session()->get('email')),
+            'dni' => strtoupper($request->session()->get('dni')),
+            'password' => $request->session()->get('password'),
+            'id_gimnasio' => $request->session()->get('id_gimnasio'),
+            'fecha_registro' => $fecha_actual,
+            'id_membresia' => $id_membresia,
+            'subscription_id' => $request->session()->get('subscription_id')
+
+        ];
+        return view("redirect.redirectRegister",compact("params"));
+
 
     }
 

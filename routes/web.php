@@ -53,8 +53,9 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/logout', 'logout');
     Route::post('/login', 'login')->name('login');
     Route::get('/registro',  'create')->name('formRegistro');
-    Route::post('/registro', 'store')->name('registro');
+    Route::post('/registroStore', 'store')->name('registroStore');
     Route::get('/perfil', 'perfil')->name('perfil');
+    Route::get('/redirectRegister', 'redirectRegister')->name('redirectRegister');
 });
 
 Route::controller(PayPalController::class)->group(function () {
