@@ -25,14 +25,11 @@ class PayPalBooking implements Bookings{
 
     }
 
-    public function createOrder(Request $request){
-
-
-        $route = route('reservar', ['clase' => $request->id_clase, 'fecha' => $request->fecha, 'horaInicio' => $request->horaInicio,
-        'horaFin' =>  $request->horaFin, 'gimnasio' => $request->id_gimnasio, "dniUsuario" => $request->dni_usuario]);
+    public function createOrder(Request $request)
+    {
+        $route = route('bookingSuccess');
 
         $data = [
-
             "intent" => "CAPTURE",
             "purchase_units" => [
                 [
@@ -44,42 +41,33 @@ class PayPalBooking implements Bookings{
             ],
             "payment_source" => [
                 "paypal" => [
-                  "experience_context" => [
-                    "payment_method_preference" => "IMMEDIATE_PAYMENT_REQUIRED",
-                    "locale" => "es-ES",
-                    "user_action" => "PAY_NOW",
-                    "return_url" => $route,
-                    "cancel_url" => route('cancel')
-                  ]
+                    "experience_context" => [
+                        "payment_method_preference" => "IMMEDIATE_PAYMENT_REQUIRED",
+                        "locale" => "es-ES",
+                        "user_action" => "PAY_NOW",
+                        "return_url" => $route,
+                        "cancel_url" => route('cancel')
+                    ]
                 ]
-
             ]
         ];
 
         $response = $this->provider->createOrder($data);
 
-
-
         if (isset($response['id']) && $response['id'] != null) {
-
-
-
-
             foreach ($response['links'] as $link) {
                 if ($link['rel'] == 'payer-action') {
 
+                    // Guardar datos en la sesión
                     $request->session()->put('id_clase', $request->id_clase);
                     $request->session()->put('fecha', $request->fecha);
                     $request->session()->put('horaInicio', $request->horaInicio);
                     $request->session()->put('horaFin', $request->horaFin);
                     $request->session()->put('dni_usuario', $request->dni_usuario);
                     $request->session()->put('id_gimnasio', $request->id_gimnasio);
+                    $request->session()->put('precio', $request->precio);
 
-
-                    return redirect()
-                    ->away($link['href'])
-                    ->withInput();
-
+                    return redirect()->away($link['href']);
                 }
             }
 
@@ -91,8 +79,6 @@ class PayPalBooking implements Bookings{
                 ->route('inicio')
                 ->with('error', $response['message'] ?? 'Response id doesnt exist');
         }
-
-
     }
 
 }
