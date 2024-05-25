@@ -66,7 +66,7 @@
         <a href="{{route ('clases')}}"type="button" class="btn boton justify-content-center textoBoton color-principal">Volver</a>
 
 
-        <form method="POST" id="reservarForm" action="{{route('bookingPayment')}}">
+        <form method="POST" id="reservarForm" action="{{route('verificarReservaNoUsuario')}}">
 
             @csrf
             <input type="hidden" name="id_clase" value="{{ $clase->_id }}">
