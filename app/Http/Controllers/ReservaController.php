@@ -107,9 +107,19 @@ class ReservaController extends Controller
 
     private function redirectBooking(Request $request)
     {
+
         // Crear un formulario oculto con los datos y enviarlo automáticamente usando JavaScript
         $params = $request->all();
-        return response()->view('redirectBooking', compact('params'));
+        return response()->view('redirect.redirectBooking', compact('params'));
+    }
+
+    public function redirectBookingToStore(Request $request){
+
+        $route = route('reservar', ['clase' => $request->session()->get('id_clase'), 'fecha' => $request->session()->get('fecha'), 'horaInicio' => $request->session()->get('horaInicio'),
+        'horaFin' =>  $request->session()->get('horaFin'), 'gimnasio' => $request->session()->get('id_gimnasio'), "dniUsuario" => $request->session()->get('dni_usuario')]);
+
+
+        return view('redirect.redirectBookingToStore', compact('route'));
     }
 
 
