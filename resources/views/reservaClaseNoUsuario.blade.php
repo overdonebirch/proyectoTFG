@@ -2,6 +2,49 @@
 
 @section("middle")
 
+
+<section class="row container-fluid  mt-5 ">
+
+
+    <div class="col-lg-12 d-flex justify-content-center " >
+        <p class="texto-negro">Datos de la clase : </p>
+    </div>
+
+    <div class="col-lg-12 d-flex justify-content-center " >
+        <p class="texto-negro">Nombre: </p>
+        <p class="texto-negro texto-color-secundario" style="padding-left: 10px "> {{  $clase->nombre}} </p>
+    </div>
+
+    <div class="col-lg-12 d-flex justify-content-center " >
+        <p class="texto-negro">Fecha:</p>
+        <p class="texto-negro texto-color-secundario" style="padding-left: 10px "> {{$fecha}}</p>
+    </div>
+
+    <div class="col-lg-12 d-flex justify-content-center " >
+        <p class="texto-negro">Hora Inicio:</p>
+        <p class="texto-negro texto-color-secundario" style="padding-left: 10px "> {{$horaInicio}} </p>
+    </div>
+
+
+    <div class="col-lg-12 d-flex justify-content-center " >
+        <p class="texto-negro">Hora Fin:</p>
+        <p class="texto-negro texto-color-secundario" style="padding-left: 10px "> {{$horaFin}} </p>
+    </div>
+
+    <div class="col-lg-12 d-flex justify-content-center " >
+        <p class="texto-negro">Gimnasio: </p>
+        <p class="texto-negro texto-color-secundario" style="padding-left: 10px "> {{$gimnasio->nombre}}</p>
+    </div>
+
+    <div class="col-lg-12 d-flex justify-content-center " >
+        <p class="texto-negro">Vacantes dispnibles: </p>
+        <p class="texto-negro texto-color-principal" style="padding-left: 10px "> {{$vacantesDisponibles}}</p>
+    </div>
+
+
+
+</section>
+
 <section class="row container-fluid  mt-5 ">
 
 

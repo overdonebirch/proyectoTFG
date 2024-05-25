@@ -42,7 +42,7 @@
 
         @php
             //Ruta para el store :
-            $route = route('reservar', ['clase' => $clase->_id, 'fecha' => $fecha, 'horaInicio' => $horaInicio,'horaFin' => $horaFin, 'gimnasio' => $gimnasio->_id, "dniUsuario" => $dni]);
+            $route = route('reservar', ['clase' => $clase->_id, 'fecha' => $fecha, 'horaInicio' => $horaInicio,'horaFin' => $horaFin, 'gimnasio' => $gimnasio->_id, "dniUsuario" => $dniUsuario]);
 
         @endphp
 
