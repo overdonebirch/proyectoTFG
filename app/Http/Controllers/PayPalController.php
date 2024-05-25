@@ -51,8 +51,15 @@ class PayPalController extends Controller
 
     public function bookingSuccess(Request $request){
 
-        return redirect(route('reservar', ['clase' => $request->session()->get('id_clase'), 'fecha' => $request->session()->get('fecha'), 'horaInicio' => $request->session()->get('horaInicio'),
-        'horaFin' =>  $request->session()->get('horaFin'), 'gimnasio' => $request->session()->get('id_gimnasio'), "dniUsuario" => $request->session()->get('dni_usuario')]));
+        $request->session()->put('id_clase', $request->session()->get('id_clase'));
+        $request->session()->put('fecha', $request->session()->get('fecha'));
+        $request->session()->put('horaInicio',$request->session()->get('horaInicio'));
+        $request->session()->put('horaFin', $request->session()->get('horaFin'));
+        $request->session()->put('id_gimnasio', $request->session()->get('id_gimnasio'));
+        $request->session()->put('dni_usuario', $request->session()->get('dni_usuario'));
+
+
+        return redirect()->route('redirectBookingToStore');
 
     }
     public function createSuscription($plan_id,$request){
