@@ -22,26 +22,8 @@ class ReservaController extends Controller
 
     public function create(Request $request, Clase $clase, String $fecha, String $horaInicio, String $horaFin,Gimnasio $gimnasio){
 
-        $dni = "*";
-
         $user = Auth::user();
-
-
-        if ($user) {
-
-            if($user->id_gimnasio != $gimnasio->_id){
-
-                return redirect()->back()->with("error","No estás inscrito en este gimnasio");
-
-            }
-            else if(!$user->membresia["acceso_clases_premium"] && $clase->tipo_clase["clase_premium"]){
-                return redirect()->back()->with("error","Tu membresía no permite acceso a esta clase (se requiere membresía Premium)");
-            }
-
-
-            $dni = $user->dni;
-
-        }
+        $dniUsuario = $user->dni;
 
         $reservationsCount = Reserva::where('id_clase', $clase->_id)->where('fecha', $fecha)->where('hora_inicio',$horaInicio)->where('hora_fin',$horaFin)->count();
         $vacantes = $this->getVacantes($clase->_id,$gimnasio);
@@ -52,51 +34,82 @@ class ReservaController extends Controller
             return redirect()->back()->with("error","Se han acabado las vacantes para esta clase");
         }
 
-        return view("reservarClase",compact("clase","fecha","horaInicio","horaFin","gimnasio","dni","vacantesDisponibles"));
+        return view("reservarClase",compact("clase","fecha","horaInicio","horaFin","gimnasio","dniUsuario","vacantesDisponibles"));
 
     }
 
     public function store(Request $request, Clase $clase, String $fecha, String $horaInicio, String $horaFin,Gimnasio $gimnasio,String $dniUsuario){
 
-        if($dniUsuario == "*"){
-            return redirect(route('reservarNoUsuario', ['clase' => $clase->_id, 'fecha' => $fecha, 'horaInicio' => $horaInicio,'horaFin' => $horaFin, 'gimnasio' => $gimnasio->_id, "dniUsuario" => $dniUsuario]));
+
+        $reserva = new Reserva();
+
+        $reserva->dni_usuario = $dniUsuario;
+        $reserva->id_clase = $clase->_id;
+        $reserva->id_gimnasio = $gimnasio->_id;
+        $reserva->fecha = $fecha;
+        $reserva->hora_inicio = $horaInicio;
+        $reserva->hora_fin = $horaFin;
+
+        try{
+            $reserva->save();
         }
-        else {
-
-            $reserva = new Reserva();
-
-            $reserva->dni_usuario = $dniUsuario;
-            $reserva->id_clase = $clase->_id;
-            $reserva->id_gimnasio = $gimnasio->_id;
-            $reserva->fecha = $fecha;
-            $reserva->hora_inicio = $horaInicio;
-            $reserva->hora_fin = $horaFin;
-
-            try{
-                $reserva->save();
-            }
-            catch(Exception  $e){
-                return redirect('clases')->with("error", "Ya existe una reserva con los mismos datos");
-            }
-
-
-            return redirect('inicio')->with("success","clase reservada correctamente");
+        catch(Exception  $e){
+            return redirect('clases')->with("error", "Ya existe una reserva con los mismos datos");
         }
 
+
+        return redirect('inicio')->with("success","clase reservada correctamente");
 
 
     }
 
     public function reservarNoUsuario(Request $request, Clase $clase, String $fecha, String $horaInicio, String $horaFin,Gimnasio $gimnasio){
 
-        $dni = "*";
+        $reservationsCount = Reserva::where('id_clase', $clase->_id)->where('fecha', $fecha)->where('hora_inicio',$horaInicio)->where('hora_fin',$horaFin)->count();
+        $vacantes = $this->getVacantes($clase->_id,$gimnasio);
 
-        $reservationsCount = Reserva::where('id_clase', $clase->_id)->where('fecha', $fecha)
-                            ->where('hora_inicio',$horaInicio)->where('hora_fin',$horaFin)->where("id_gimnasio",$gimnasio->_id)->count();
-                            $precio = $clase->tipo_clase["costo_unico"];;
+        $vacantesDisponibles = $vacantes - $reservationsCount;
 
-        return view("reservaClaseNoUsuario",compact("clase","fecha","horaInicio","horaFin","gimnasio","dni","precio","request"));
+        if( $vacantesDisponibles <= 0) {
+            return redirect()->back()->with("error","Se han acabado las vacantes para esta clase");
+        }
 
+        $precio = $clase->tipo_clase["costo_unico"];
+        return view("reservaClaseNoUsuario",compact("clase","fecha","horaInicio","horaFin","gimnasio","precio","vacantesDisponibles"));
+
+    }
+
+    public function verificarReservaNoUsuario(Request $request)
+    {
+        $dni = $request->input('dni_usuario');
+        $idClase = $request->input('id_clase');
+        $fecha = $request->input('fecha');
+        $horaInicio = $request->input('horaInicio');
+        $horaFin = $request->input('horaFin');
+        $idGimnasio = $request->input('id_gimnasio');
+
+        // Verificar si la reserva ya existe
+        $reservaExistente = Reserva::where('dni_usuario', $dni)
+            ->where('id_clase', $idClase)
+            ->where('fecha', $fecha)
+            ->where('hora_inicio', $horaInicio)
+            ->where('hora_fin', $horaFin)
+            ->where('id_gimnasio', $idGimnasio)
+            ->first();
+
+        if ($reservaExistente) {
+            return redirect()->back()->with("error","ya existe una reserva con los mismos datos");
+        }
+
+        // Redirigir a PayPal
+        return $this->redirectBooking($request);
+    }
+
+    private function redirectBooking(Request $request)
+    {
+        // Crear un formulario oculto con los datos y enviarlo automáticamente usando JavaScript
+        $params = $request->all();
+        return response()->view('redirectBooking', compact('params'));
     }
 
 
