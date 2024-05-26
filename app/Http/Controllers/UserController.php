@@ -89,11 +89,13 @@ class UserController extends Controller
         try{
             $user = User::create([
                 'nombre' => $request->nombre,
+                'apellidos' => $request->apellidos,
                 'email' => $request->email,
                 'dni' => $request->dni,
-                'password' => Hash::make($request->password),
+                'password' => $request->password,
                 'id_gimnasio' => $request->id_gimnasio,
-                'membresia' => $membresia
+                'fecha_registro' => $request->fecha_registro,
+                'membresia' => $membresia->toArray()
             ]);
             Suscripcion::create([
 
