@@ -14,6 +14,11 @@
 @section('middle')
 
     @component('_components.inicio.segundaSeccion')
+        @if (Route::has('login'))
+        @auth
+            @slot('gimnasio_id',$gimnasioUser->_id)
+        @endauth
+        @endif
 
     @endcomponent
 

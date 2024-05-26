@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Gimnasio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GimnasioController extends Controller
 {
@@ -12,7 +13,18 @@ class GimnasioController extends Controller
      */
     public function index()
     {
-        return view("inicio");
+        $user = null;
+        $gimnasioUser = null;
+
+        if(Auth::user()){
+            $user = Auth::user();
+            $gimnasioUser = Gimnasio::where("_id",$user->id_gimnasio)->first();
+
+        }
+
+
+        return view("inicio",compact('user','gimnasioUser'));
+
     }
 
     public function dondeEstamos()
