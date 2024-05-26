@@ -3,7 +3,7 @@
 
         <div class="col-md-12 d-flex justify-content-start  align-items-end "><p class="textoPromocional"> No lo pienses mucho.</p></div>
         <div class="col-md-12 d-flex justify-content-start"><p class="textoPromocional"> Apúntate ya.</p></div>
-        <div class="col-md-12 d-flex justify-content-start"> <button type="button" class="btn boton justify-content-center textoBoton textoBoton-fondoBlanco color-blanco">Apúntate</button></div>
+        <div class="col-md-12 d-flex justify-content-start"> <a type="button" href="{{route('formRegistro')}}" class="btn boton justify-content-center textoBoton textoBoton-fondoBlanco color-blanco">Apúntate</a></div>
 
     </div>
 </section>

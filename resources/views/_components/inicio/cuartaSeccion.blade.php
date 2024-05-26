@@ -4,14 +4,14 @@
     </article>
 
     <article class="row">
-        <div class="col-md-4 imgTransformable">
-            <img src="{{asset('assets/img/gym1.jpg') }}" />
+        <div class="col-md-4 ">
+            <img class="imgTransformable" src="{{asset('assets/img/gym1.jpg') }}" />
         </div>
         <div class="col-md-4 imgTransformable">
-            <img src="{{asset('assets/img/gym2.jpg') }}" />
+            <img class="imgTransformable" src="{{asset('assets/img/gym2.jpg') }}" />
         </div>
         <div class="col-md-4 imgTransformable">
-            <img src="{{asset('assets/img/gym3.jpg') }}" />
+            <img class="imgTransformable" src="{{asset('assets/img/gym3.jpg') }}" />
         </div>
     </article>
 </section>

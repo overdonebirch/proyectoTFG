@@ -1,5 +1,5 @@
 
-<section class="row inicio__terceraSeccion mt-5 imagenFondo container-fluid">
+<section class="row inicio__terceraSeccion imagenFondo container-fluid margin-top-big">
     <div class="col-md-12 d-flex justify-content-center">
         <p class="mt-5 textoPromocional__subtitulo ">Disfruta de las mejores clases para tonificar</p>
     </div>
