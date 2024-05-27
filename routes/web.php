@@ -41,6 +41,7 @@ Route::controller(ClaseController::class)->group(function () {
 
 Route::controller(ReservaController::class)->group(function () {
     Route::get('/reservasUsuario','reservasUsuario')->name("reservasUsuario");
+    Route::get('/solicitarDniReserva','solicitarDniReserva')->name("dniReserva");
     Route::delete('/eliminarReserva/{reserva}','destroy')->name("reserva.destroy");
     Route::get('/reservarClase/{clase}/{fecha}/{horaInicio}/{horaFin}/{gimnasio}', 'create')->name("reservarClase")->middleware('booking');
     Route::post('/reservar/{clase}/{fecha}/{horaInicio}/{horaFin}/{gimnasio}/{dniUsuario}', 'store')->name("reservar");

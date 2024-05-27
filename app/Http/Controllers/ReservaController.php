@@ -20,14 +20,40 @@ class ReservaController extends Controller
     public function index(){
 
     }
-    public function reservasUsuario(){
+
+    public function solicitarDniReserva(){
+        return view('solicitarDniReserva');
+    }
+    public function reservasUsuario(Request $request){
+
 
         $user = Auth::user();
+        $dni = null;
+
+        if($user){
+            $dni = $user->dni;
+        }
+        else{
+            $dni = $request->dniReserva;
+        }
+
+
 
         $reservas = Reserva::with(['gimnasio', 'clase'])
-                           ->where('dni_usuario', $user->dni)
+                           ->where('dni_usuario', $dni)
                            ->get();
 
+
+        if ($reservas->isEmpty()) {
+
+            if(Auth::user()){
+                return redirect('perfil')->with("success", "Se han eliminado todas las reservas");
+            }
+            else{
+                return redirect('inicio')->with("error", "No existen reservas de ese usuario");
+            }
+
+        }
         return view('reservasUsuario', compact('reservas'));
 
     }
