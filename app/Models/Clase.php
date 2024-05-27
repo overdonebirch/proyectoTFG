@@ -25,4 +25,9 @@ class Clase extends Model
         return $this->belongsTo(TipoClase::class, 'tipoClase');
     }
 
+    public function reservas()
+    {
+        return $this->hasMany(Reserva::class, 'id_clase', '_id');
+    }
+
 }

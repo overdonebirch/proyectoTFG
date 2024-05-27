@@ -18,6 +18,10 @@ class Gimnasio extends Model
         'clases',
     ];
 
+    public function reservas()
+    {
+        return $this->hasMany(Reserva::class, 'id_gimnasio', '_id');
+    }
 
     public function clases()
     {

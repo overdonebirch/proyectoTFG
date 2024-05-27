@@ -19,5 +19,13 @@ class Reserva extends Model
 
     ];
 
+    public function gimnasio()
+    {
+        return $this->belongsTo(Gimnasio::class, 'id_gimnasio', '_id');
+    }
 
+    public function clase()
+    {
+        return $this->belongsTo(Clase::class, 'id_clase', '_id');
+    }
 }
