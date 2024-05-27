@@ -18,7 +18,20 @@ class ReservaController extends Controller
 {
 
     public function index(){
+
     }
+    public function reservasUsuario(){
+
+        $user = Auth::user();
+
+        $reservas = Reserva::with(['gimnasio', 'clase'])
+                           ->where('dni_usuario', $user->dni)
+                           ->get();
+
+        return view('reservasUsuario', compact('reservas'));
+
+    }
+
 
     public function create(Request $request, Clase $clase, String $fecha, String $horaInicio, String $horaFin,Gimnasio $gimnasio){
 

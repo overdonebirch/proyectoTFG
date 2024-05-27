@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Gimnasio;
 use App\Models\Membresia;
 use App\Models\Plan;
+use App\Models\Reserva;
 use App\Models\Suscripcion;
 use App\Models\User;
 use Carbon\Carbon;
@@ -32,14 +33,14 @@ class UserController extends Controller
 
     }
 
-
     public function perfil(){
 
         $user = Auth::user();
 
+        $reservas = Reserva::where("dni_usuario",$user->dni)->get();
         $gimnasio = Gimnasio::where("_id",$user->id_gimnasio)->first();
 
-        return view("perfil",compact('user','gimnasio'));
+        return view("perfil",compact('user','gimnasio','reservas'));
     }
 
     public function login(Request $request)

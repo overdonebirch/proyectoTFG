@@ -32,6 +32,18 @@
             <p class="texto-negro">Cliente desde:  </p>
             <p class="texto-negro texto-color-secundario" style="padding-left: 10px "> {{ $user->fecha_registro }} </p>
         </div>
+        @if($reservas->count() <= 0 )
+            <div class="d-flex">
+                <p class="texto-negro texto-color-secundario" style="padding-left: 10px "> No tienes reservas de clases </p>
+            </div>
+        @else
+            <div class="d-flex">
+                <a href="{{'reservasUsuario'}}"class="texto-negro texto-color-principal" style="padding-left: 10px; text-decoration:underline; font-size:20px"> Ver tus clases reservadas</a>
+            </div>
+        @endif
+
+
+
     </div>
 
 
