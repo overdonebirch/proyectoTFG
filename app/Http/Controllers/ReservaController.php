@@ -75,6 +75,10 @@ class ReservaController extends Controller
 
 
     }
+    public function destroy(Reserva $reserva){
+        $reserva->delete();
+        return redirect()->back()->with('success', 'Reserva eliminada');
+    }
 
     public function reservarNoUsuario(Request $request, Clase $clase, String $fecha, String $horaInicio, String $horaFin,Gimnasio $gimnasio){
 
