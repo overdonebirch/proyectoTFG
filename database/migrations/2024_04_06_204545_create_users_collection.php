@@ -22,7 +22,8 @@ return new class extends Migration
             $collection->objectId('id_gimnasio');
             $collection->json('membresia');
             $collection->string('fecha_registro');
-
+            $collection->boolean('empleado');
+            $collection->boolean('administrador');
 
         });
 
