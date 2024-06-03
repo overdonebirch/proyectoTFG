@@ -12,10 +12,11 @@
         @if (Route::has('login'))
 
             @auth
-                <div class="col-md-2 d-flex justify-content-md-end justify-content-center mt-md-0 mt-3">
-                    <a href="{{route('perfil')}}" type="button" class="btn boton justify-content-center textoBoton color-principal">Ver Perfil</a>
-                </div>
-
+                @if (!Auth::user()->empleado && !Auth::user()->administrador )
+                    <div class="col-md-2 d-flex justify-content-md-end justify-content-center mt-md-0 mt-3">
+                        <a href="{{route('perfil')}}" type="button" class="btn boton justify-content-center textoBoton color-principal">Ver Perfil</a>
+                    </div>
+                @endif
                 <div class="col-md-2 d-flex justify-content-md-start justify-content-center mt-md-0 mt-3">
                     <a href="{{route ('logout')}}"type="button" class="btn boton justify-content-center textoBoton color-secundario">Cerrar Sesión</a>
                 </div>
