@@ -53,11 +53,13 @@ Route::controller(ReservaController::class)->group(function () {
 
 Route::controller(UserController::class)->group(function () {
     Route::get('/login', 'formLogin')->middleware('guest');
+    Route::get('/editUser', 'edit')->name('editUser')->middleware('empleado');
+    Route::put('/updateUser/{user}', 'update')->name('updateUser')->middleware('empleado');
     Route::get('/logout', 'logout');
     Route::post('/login', 'login')->name('login');
     Route::get('/registro',  'create')->name('formRegistro');
     Route::post('/registroStore', 'store')->name('registroStore');
-    Route::get('/perfil', 'perfil')->name('perfil');
+    Route::get('/perfil', 'show')->name('perfil');
     Route::get('/redirectRegister', 'redirectRegister')->name('redirectRegister');
 });
 

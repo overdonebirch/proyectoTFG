@@ -8,6 +8,7 @@ use App\Models\Plan;
 use App\Models\Reserva;
 use App\Models\Suscripcion;
 use App\Models\User;
+use App\Subscriptions\PayPalSubscription;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Session;
@@ -31,16 +32,6 @@ class UserController extends Controller
 
         return view("auth.login");
 
-    }
-
-    public function perfil(){
-
-        $user = Auth::user();
-
-        $reservas = Reserva::where("dni_usuario",$user->dni)->get();
-        $gimnasio = Gimnasio::where("_id",$user->id_gimnasio)->first();
-
-        return view("perfil",compact('user','gimnasio','reservas'));
     }
 
     public function login(Request $request)
@@ -142,25 +133,45 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
+        $user = Auth::user();
+
+        $reservas = Reserva::where("dni_usuario",$user->dni)->get();
+        $gimnasio = Gimnasio::where("_id",$user->id_gimnasio)->first();
+
+        return view("perfil",compact('user','gimnasio','reservas'));
 
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request)
     {
+        $user = null;
 
+        if($request->dniUsuario){
+            $user = User::where("dni",$request->dniUsuario)->first();
+        }
+
+        $gimnasios = Gimnasio::all();
+        return view('empleado.editUser',compact('user','gimnasios'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
+        $user->nombre = $request->nombre;
+        $user->apellidos = $request->apellidos;
+        $user->email = $request->email;
+        $user->id_gimnasio = $request->id_gimnasio;
 
+        $user->save();
+
+        return redirect()->back()->with('success','usuario modificado');
     }
 
     /**
