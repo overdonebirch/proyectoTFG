@@ -11,7 +11,6 @@
                 <button type="submit" class="btn boton justify-content-center textoBoton color-secundario" style="margin-left: 10px">Buscar</button>
             </div>
         </form>
-        <div id="mensajes" class="col-lg-12 d-flex justify-content-center mt-3"></div>
     </section>
 
     <script>
