@@ -152,7 +152,7 @@ class UserController extends Controller
         $user = null;
 
         if($request->dniUsuario){
-            $user = User::where("dni",$request->dniUsuario)->first();
+            $user = User::where("dni",strtoupper($request->dniUsuario))->first();
         }
 
         $gimnasios = Gimnasio::all();
