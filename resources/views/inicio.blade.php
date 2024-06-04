@@ -2,7 +2,7 @@
 
 @section('top')
 
-@component('_components.inicio.primeraSeccion')
+@component('_components.inicio.cliente.primeraSeccion')
 
 @endcomponent
 
@@ -13,7 +13,7 @@
 
 @section('middle')
 
-    @component('_components.inicio.segundaSeccion')
+    @component('_components.inicio.cliente.segundaSeccion')
         @if (Route::has('login'))
         @auth
             @slot('gimnasio_id',$gimnasioUser->_id)
@@ -22,14 +22,14 @@
 
     @endcomponent
 
+    @if(!Auth::user())
+        @component('_components.inicio.cliente.terceraSeccion')
 
-    @component('_components.inicio.terceraSeccion')
-
-    @endcomponent
-
+        @endcomponent
+    @endif
 
 
-    @component('_components.inicio.cuartaSeccion')
+    @component('_components.inicio.cliente.cuartaSeccion')
 
     @endcomponent
 
