@@ -8,7 +8,11 @@
                 <p class="texto-negro ">Introduce El dni del usuario que quieras consultar</p>
                 <input type="text" id="dni" class="texto-negro texto-color-secundario" style="padding-left: 10px"/>
                 <input type="hidden" id="dniHidden" name="dniUsuario" class="texto-negro texto-color-secundario" style="padding-left: 10px"/>
-                <button type="submit" class="btn boton justify-content-center textoBoton color-secundario" style="margin-left: 10px">Buscar</button>
+                @if($eliminarUsuario)
+                    <button type="submit" name="eliminarUser" class="btn boton justify-content-center textoBoton color-secundario" style="margin-left: 10px">Buscar</button>
+                @else
+                    <button type="submit" class="btn boton justify-content-center textoBoton color-secundario" style="margin-left: 10px">Buscar</button>
+                @endif
             </div>
         </form>
     </section>
@@ -16,44 +20,66 @@
 
 @if ($user)
 
-<form  action="{{ route('updateUser',$user) }}" method="POST">
+
 
     @csrf
     @method('PUT')
 
-    @component('_components.datosUsuario')
+    @if($eliminarUsuario)
+        <form  action="{{ route('user.destroy',$user) }}" method="POST">
+            @csrf
+            @method('DELETE')
 
-        @slot('nombre')
-            <input type="text" name="nombre" class="texto-color-secundario" value="{{ $user->nombre }}">
-        @endslot
+            @component('_components.datosUsuario')
+                @slot('nombre',$user->nombre)
+                @slot('apellidos',$user->apellidos)
+                @slot('membresia',$user->membresia["nombre"])
+                @slot('email',$user->email)
+                @slot('gimnasioNombre',$gimnasio->nombre)
+                @slot('fecha_registro',$user->fecha_registro)
+                    @slot('reservas')
+                        <button type="submit" class="btn boton justify-content-end textoBoton color-negro">Eliminar usuario</button>
+                    @endslot
+            @endcomponent
+        </form>
+    @else
+        <form  action="{{ route('updateUser',$user) }}" method="POST">
+            @component('_components.datosUsuario')
 
-        @slot('apellidos')
-            <input type="text" name="apellidos" class="texto-color-secundario" value="{{ $user->apellidos }}">
-        @endslot
+                @slot('nombre')
+                    <input type="text" name="nombre" class="texto-color-secundario" value="{{ $user->nombre }}">
+                @endslot
 
-        @slot('membresia',$user->membresia["nombre"])
+                @slot('apellidos')
+                    <input type="text" name="apellidos" class="texto-color-secundario" value="{{ $user->apellidos }}">
+                @endslot
 
-        @slot('email')
-            <input type="email" name="email" class="texto-color-secundario" value="{{ $user->email }}">
-        @endslot
+                @slot('membresia',$user->membresia["nombre"])
 
-        @slot('gimnasioNombre')
-            <select class="form-select w-100 texto-color-secundario" name="id_gimnasio">
-                @foreach ($gimnasios as $g)
-                    <option class="texto-color-secundario"value="{{ $g->_id }}" >{{ $g->nombre }}</option>
-                @endforeach
-            </select>
-        @endslot
+                @slot('email')
+                    <input type="email" name="email" class="texto-color-secundario" value="{{ $user->email }}">
+                @endslot
 
-        @slot('fecha_registro',$user->fecha_registro)
+                @slot('gimnasioNombre')
+                    <select class="form-select w-100 texto-color-secundario" name="id_gimnasio">
+                        @foreach ($gimnasios as $g)
+                            <option class="texto-color-secundario"value="{{ $g->_id }}" >{{ $g->nombre }}</option>
+                        @endforeach
+                    </select>
+                @endslot
 
-        @slot('reservas')
-            <button type="submit" class="btn boton justify-content-end textoBoton color-secundario">Actualizar usuario</button>
-        @endslot
+                @slot('fecha_registro',$user->fecha_registro)
 
-    @endcomponent
 
-</form>
+                @slot('reservas')
+                    <button type="submit" class="btn boton justify-content-end textoBoton color-secundario">Actualizar usuario</button>
+                @endslot
+
+            @endcomponent
+        </form>
+    @endif
+
+
 
 @endif
 

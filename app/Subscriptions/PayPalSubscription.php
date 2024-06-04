@@ -107,8 +107,7 @@ class PayPalSubscription implements Subscriptions
     public function cancel(string $subscription_id = null){
 
         try {
-            $response = $this->provider->cancelSubscription($subscription_id, "no longer using");
-            redirect()->route('inicio')->with("success","se canceló la suscripcion");
+           $this->provider->cancelSubscription($subscription_id, "no longer using");
         } catch (Exception $e) {
             $error = "Something went wrong." . $e->getMessage();
             return "no se cancelo";

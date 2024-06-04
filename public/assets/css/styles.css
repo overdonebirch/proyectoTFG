@@ -271,6 +271,23 @@ p,.textoBoton,input,.texto-menu{
     background-color: white;
 }
 
+.color-negro{
+    background-color: var(--negroLigero)
+}
+
+/*** Clases pagina inicio Empleados ***/
+
+
+.panelOpciones{
+
+    background-color: rgb(241, 236, 216);
+    width: 70rem;
+    height: 50rem;
+
+    border-radius: 2rem;
+
+}
+
 
 /********IMAGENES ******/
 

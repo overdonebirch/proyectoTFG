@@ -149,14 +149,30 @@ class UserController extends Controller
      */
     public function edit(Request $request)
     {
+
         $user = null;
+        $eliminarUsuario = null;
+        $gimnasio = null;
 
         if($request->dniUsuario){
+
             $user = User::where("dni",strtoupper($request->dniUsuario))->first();
+
+            if($user == null){
+                return redirect()->back()->with('error','no existe el usuario');
+            }
+
+            $gimnasio = Gimnasio::where('_id',$user->id_gimnasio)->first();
         }
 
+        if($request->has('eliminarUser')){
+            $eliminarUsuario = true;
+        }
+
+
+
         $gimnasios = Gimnasio::all();
-        return view('empleado.editUser',compact('user','gimnasios'));
+        return view('empleado.editUser',compact('user','gimnasios','eliminarUsuario','gimnasio'));
     }
 
     /**
@@ -177,8 +193,17 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+
+        $suscription = Suscripcion::where("id_cliente",$user->_id)->first();
+        $paypalSuscription = new PayPalSubscription();
+        $paypalSuscription->cancel($suscription ->id_suscripcion);
+
+        $suscription->delete();
+        $user->delete();
+
+
+        return redirect('inicio')->with('success','usuario eliminado');
     }
 }

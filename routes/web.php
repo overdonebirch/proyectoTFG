@@ -55,6 +55,7 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/login', 'formLogin')->middleware('guest');
     Route::get('/editUser', 'edit')->name('editUser')->middleware('empleado');
     Route::put('/updateUser/{user}', 'update')->name('updateUser')->middleware('empleado');
+    Route::delete('/eliminarUser/{user}','destroy')->name("user.destroy");
     Route::get('/logout', 'logout');
     Route::post('/login', 'login')->name('login');
     Route::get('/registro',  'create')->name('formRegistro');
