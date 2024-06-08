@@ -18,7 +18,16 @@
 @section('middle')
 
     @component('_components.gimnasio.botonesGimnasio')
+        @slot('inscribete')
+            <a type="button" type="button" href="{{route('formRegistro')}}"class="btn boton__gym__especifico d-flex justify-content-center align-items-center textoBoton  texto-negro">Inscríbete Aqui</a>
+        @endslot
 
+        @slot('verClases')
+            <form action="{{route('clases')}}" method="GET">
+                <input type="hidden" name="gimnasio_id" value="{{$gimnasio->_id}}"/>
+                <button type="submit" class="btn boton__gym__especifico justify-content-center textoBoton texto-negro">Ver Clases</button>
+            </form>
+        @endslot
     @endcomponent
 
 
