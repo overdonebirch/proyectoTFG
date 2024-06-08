@@ -19,9 +19,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -29,7 +29,7 @@ Route::get('/dashboard', function () {
 
 
 Route::controller(GimnasioController::class)->group(function () {
-    Route::get('/inicio', 'index')->name('inicio');
+    Route::get('/', 'index')->name('inicio');
     Route::get('/dondeEstamos', 'dondeEstamos')->name('dondeEstamos');
     Route::get('/gimnasio/{gimnasio}', 'gimnasio')->name('gimnasio');
 });
