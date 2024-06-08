@@ -40,7 +40,7 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Redirigir al usuario a la ruta de inicio después de iniciar sesión correctamente
-            return redirect()->intended('/inicio')->with('success', 'Logado correctamente');
+            return redirect('/')->with('success', 'Logado correctamente');
         }
 
         // Si las credenciales son incorrectas, redirigir de vuelta al formulario de login con un mensaje de error
@@ -53,7 +53,7 @@ class UserController extends Controller
         $request->session()->invalidate();  // Invalida la sesión actual
         $request->session()->regenerateToken();  // Regenera el token CSRF
 
-        return redirect('/inicio')->with('success', 'Has cerrado sesión correctamente');
+        return redirect('/')->with('success', 'Has cerrado sesión correctamente');
     }
     /**
      * Show the form for creating a new resource.
@@ -96,11 +96,11 @@ class UserController extends Controller
 
             ]);
 
-            return redirect('inicio')->with('success', 'Usuario Registrado');
+            return redirect('/')->with('success', 'Usuario Registrado');
 
         }
         catch(Exception $e){
-            return redirect('inicio')->with("error",$e->getMessage());
+            return redirect('/')->with("error",$e->getMessage());
         }
 
 
@@ -204,6 +204,6 @@ class UserController extends Controller
         $user->delete();
 
 
-        return redirect('inicio')->with('success','usuario eliminado');
+        return redirect('/')->with('success','usuario eliminado');
     }
 }

@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect('/inicio')->with("success","Logado Correctamente");
+        return redirect('/')->with("success","Logado Correctamente");
     }
 
     /**
