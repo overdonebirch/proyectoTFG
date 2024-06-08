@@ -50,7 +50,7 @@ class ReservaController extends Controller
                 return redirect('perfil')->with("success", "Se han eliminado todas las reservas");
             }
             else{
-                return redirect('inicio')->with("error", "No existen reservas de ese usuario");
+                return redirect('/')->with("error", "No existen reservas de ese usuario");
             }
 
         }
@@ -97,7 +97,7 @@ class ReservaController extends Controller
         }
 
 
-        return redirect('inicio')->with("success","clase reservada correctamente");
+        return redirect('/')->with("success","clase reservada correctamente");
 
 
     }
