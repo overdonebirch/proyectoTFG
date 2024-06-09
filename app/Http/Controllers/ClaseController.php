@@ -34,9 +34,9 @@ class ClaseController extends Controller
                 foreach ($clases as $clase) {
                     foreach ($clase['horario'] as $horario) {
                         $nombreClase = $clase['clase']['tipo_clase']['nombre'];
-                        $firstDayOfMonth = \Carbon\Carbon::now()->startOfMonth();
-                        $lastDayOfMonth = \Carbon\Carbon::now()->endOfMonth();
-                        $dates = \Carbon\CarbonPeriod::create($firstDayOfMonth, $lastDayOfMonth);
+                        $primerDiaMes = \Carbon\Carbon::now();
+                        $ultimoDiaMes = \Carbon\Carbon::now()->endOfMonth();
+                        $dates = \Carbon\CarbonPeriod::create($primerDiaMes, $ultimoDiaMes);
 
                         $filteredDates = collect($dates)->filter(function ($date) use ($horario) {
                             return $date->dayOfWeek === $horario['dia'];

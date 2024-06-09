@@ -4,9 +4,6 @@
             <a href="{{route ('editUser')}}"type="button" class="btn boton justify-content-center textoBoton color-secundario">Editar Usuario</a>
         </div>
 
-        <div class="col-md-12 d-flex  justify-content-center ">
-            <a href="{{route ('editUser')}}"type="button" class="btn boton justify-content-center textoBoton color-secundario"> Cambiar Hora De Clases</a>
-        </div>
 
         <div class="col-md-12 d-flex  justify-content-center ">
             <form method="GET" action="{{route('editUser')}}">
